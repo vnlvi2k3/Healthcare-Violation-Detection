@@ -21,6 +21,17 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+# Related to "Error XA5207: Could not find android.jar for API level 29."
+- script: 'C:\Android\android-sdk\cmdline-tools\latest\bin\sdkmanager "platforms;android-29" '
+  displayName: 'Install Android 29 platform'
+
+- script: 'C:\Android\android-sdk\cmdline-tools\latest\bin\sdkmanager "build-tools;29.0.0" '
+  displayName: 'Install Android 29 build tool'
+
+- script: 'C:\Android\android-sdk\cmdline-tools\latest\bin\sdkmanager --list_installed'
+  displayName: 'Check sdk list'
+#
+
 - task: VSBuild@1
   inputs:
     solution: '**/*.csproj'
