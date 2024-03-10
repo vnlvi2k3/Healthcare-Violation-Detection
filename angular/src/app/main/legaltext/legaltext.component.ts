@@ -7,6 +7,7 @@ import { VanBanPhapLyServiceProxy, VanBanPhapLyListDto, ListResultDtoOfVanBanPha
     templateUrl: './legaltext.component.html',
     animations: [appModuleAnimation()]
 })
+
 export class LegalTextComponent extends AppComponentBase implements OnInit {
 
     text: VanBanPhapLyListDto[] = [];

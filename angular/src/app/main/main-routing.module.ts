@@ -15,7 +15,6 @@ import { RouterModule } from '@angular/router';
                     {
                         path: 'document',
                         loadChildren: () => import('./document/document.module').then((m) => m.documentModule),
-
                     },
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
                     { path: '**', redirectTo: 'dashboard' }
