@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {QuanlyvanbanComponent} from './quanlyvanban.component';
+import {DocumentComponent} from './document.component';
 
 const routes: Routes = [{
     path: '',
-    component: QuanlyvanbanComponent,
+    component: DocumentComponent,
     pathMatch: 'full'
 }];
 
@@ -12,4 +12,4 @@ const routes: Routes = [{
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class documentRoutingModule {}
+export class DocumentRoutingModule {}

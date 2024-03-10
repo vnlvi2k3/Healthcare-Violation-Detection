@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {AppSharedModule} from '@app/shared/app-shared.module';
-import {documentRoutingModule} from './document-routing.module';
-import {documentComponent} from './document.component';
+import {DocumentRoutingModule} from './document-routing.module';
+import {DocumentComponent} from './document.component';
 
 @NgModule({
-    declarations: [documentComponent],
-    imports: [AppSharedModule, documentRoutingModule]
+    declarations: [DocumentComponent],
+    imports: [AppSharedModule, DocumentRoutingModule]
 })
-export class documentModule {}
+export class DocumentModule {}
