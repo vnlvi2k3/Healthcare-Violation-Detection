@@ -16,3 +16,4 @@ ____________
 | :--: | :-----------: | :--------: | :----------------------------------------------------------: |
 | 11.1  | 🚧 &thinsp; In Progress | 2022-01-31 | [Open](https://github.com/aspnetzero/aspnet-zero-core/milestone/93)<br>[Closed](https://github.com/aspnetzero/aspnet-zero-core/milestone/93?closed=1) |
 
+Link of project deployment: ytethongminh.io.vn
