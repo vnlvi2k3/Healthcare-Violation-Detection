@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System;
 using MyCompanyName.AbpZeroTemplate.Authorization.Users;
 
-namespace MyCompanyName.AbpZeroTemplate.MyDocument
+namespace MyCompanyName.AbpZeroTemplate.Documents
 {
     [Table("PbDocuments")]
     public class Document : FullAuditedEntity

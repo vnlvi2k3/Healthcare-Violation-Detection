@@ -1,10 +1,19 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using MyCompanyName.AbpZeroTemplate.Authorization;
+using Abp.Linq.Extensions;
+using Abp.Extensions;
+using MyCompanyName.AbpZeroTemplate.Documents;
+using MyCompanyName.AbpZeroTemplate.IDocument;
 using MyCompanyName.AbpZeroTemplate.MyDocument;
-using MyCompanyName.AbpZeroTemplate.MyDocument.DTO;
+\\using MyCompanyName.AbpZeroTemplate.MyDocument.DTO;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -26,13 +35,19 @@ namespace MyCompanyName.AbpZeroTemplate.DocumentService
             _documentRepository = documentRepository;
         }
 
-        [AbpAuthorize(AppPermissions.Pages_Tenant_Document_DeleteRestore)]
-
-        public async Task DeleteDocument(EntityDto input)
+        public ListResultDto<DocumentListDto> GetDocument(GetDocumentInput input)
         {
-            await _documentRepository.DeleteAsync(input.Id);
-
-        }
+            var document = _documentRepository
+                .GetAll()
+                .WhereIf(
+                !input.Filter.IsNullOrEmpty(),
+                p => p.title.Contains(input.Filter) ||
+                     p.code.Contains(input.Filter) ||
+                     p.description.Contains(input.Filter)
+            )
+            .OrderBy(p => p.title)
+            .ThenBy(p => p.code)
+            .ToList();
 
         [AbpAuthorize(AppPermissions.Pages_Tenant_Document_DeleteRestore)]
         public async Task RestoreDocument(int input)
