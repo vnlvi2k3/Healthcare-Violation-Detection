@@ -11,7 +11,7 @@ import { AppConsts } from '@shared/AppConsts';
     animations: [appModuleAnimation()]
 })
 
-export class DocumentComponent extends AppComponentBase{
+export class DocumentComponent extends AppComponentBase {
 
     documents: DocumentListDto[] = [];
     filter: string = '';
