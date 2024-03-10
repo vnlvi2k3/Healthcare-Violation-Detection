@@ -10,6 +10,7 @@ using MyCompanyName.AbpZeroTemplate.Friendships;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Accounting;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments;
+using MyCompanyName.AbpZeroTemplate.MyDocument;
 using MyCompanyName.AbpZeroTemplate.Storage;
 
 namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
@@ -23,6 +24,10 @@ namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
         public virtual DbSet<Friendship> Friendships { get; set; }
 
         public virtual DbSet<ChatMessage> ChatMessages { get; set; }
+
+        public virtual DbSet<Document> Documents { get; set; }
+
+        public virtual DbSet<OldDocument> OldDocuments { get; set; }
 
         public virtual DbSet<SubscribableEdition> SubscribableEditions { get; set; }
 
