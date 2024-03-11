@@ -14,7 +14,6 @@ using Abp.Linq.Extensions;
 using Abp.Extensions;
 using MyCompanyName.AbpZeroTemplate.VanBanPhapLyservice.Dto;
 
-
 public class VanBanPhapLyAppService : AbpZeroTemplateAppServiceBase, IVanBanPhapLyAppService
 {
     private readonly IRepository<VanBanPhapLy> _vanbanphaplyRepository;
