@@ -5,12 +5,12 @@ using MyCompanyName.AbpZeroTemplate.Authorization.Delegation;
 using MyCompanyName.AbpZeroTemplate.Authorization.Roles;
 using MyCompanyName.AbpZeroTemplate.Authorization.Users;
 using MyCompanyName.AbpZeroTemplate.Chat;
-using MyCompanyName.AbpZeroTemplate.Documents;
 using MyCompanyName.AbpZeroTemplate.Editions;
 using MyCompanyName.AbpZeroTemplate.Friendships;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Accounting;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments;
+using MyCompanyName.AbpZeroTemplate.MyDocument;
 using MyCompanyName.AbpZeroTemplate.Storage;
 
 namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
@@ -27,7 +27,7 @@ namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
 
         public virtual DbSet<Document> Documents { get; set; }
 
-//        public virtual DbSet<OldDocument> OldDocuments { get; set; }
+        public virtual DbSet<OldDocument> OldDocuments { get; set; }
 
         public virtual DbSet<SubscribableEdition> SubscribableEditions { get; set; }
 
