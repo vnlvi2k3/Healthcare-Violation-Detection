@@ -1,4 +1,4 @@
-<div [@routerTransition]>
+<!-- <div [@routerTransition]>
     <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
         <div class="kt-subheader kt-grid__item">
             <div class="kt-container ">
@@ -8,7 +8,6 @@
                     </h3>
                     <span class="kt-subheader__separator kt-subheader__separator--v"></span>
                     <span class="kt-subheader__desc">
-                        <!-- {{"Edit Tenant Header Info" | localize}} -->
                     </span>
                 </div>
                 <div class="kt-subheader__toolbar">
@@ -49,5 +48,45 @@
             </div>
             <createTextModal #createTextModal (modalSave)="getText()"></createTextModal>
         </div>
+    </div>
+</div> -->
+
+<div [@routerTransition]>
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <h3 class="page-title">{{ "Legal Text" | localize }}</h3>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">{{ "All Legal Text" | localize }} ({{ text.length }})</h4>
+                    </div>
+                    <div class="card-body">
+                        <form autocomplete="off" (submit)="getText()">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input [(ngModel)]="filter" name="filterText" class="form-control" placeholder="{{ 'SearchWithThreeDot' | localize }}" type="text">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let each of text">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{ each.name + ' ' + each.surname }}</h4>
+                                        <p class="card-text">{{ each.emailAddress }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <createTextModal #createTextModal (modalSave)="getText()"></createTextModal>
     </div>
 </div>
