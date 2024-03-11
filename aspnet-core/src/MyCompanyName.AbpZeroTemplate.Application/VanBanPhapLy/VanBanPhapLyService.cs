@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Linq.Extensions;
 using Abp.Extensions;
+using MyCompanyName.AbpZeroTemplate.VanBanPhapLyservice.Dto;
 
 public class VanBanPhapLyAppService : AbpZeroTemplateAppServiceBase, IVanBanPhapLyAppService
 {
@@ -38,4 +39,11 @@ public class VanBanPhapLyAppService : AbpZeroTemplateAppServiceBase, IVanBanPhap
 
         return new ListResultDto<VanBanPhapLyListDto>(ObjectMapper.Map<List<VanBanPhapLyListDto>>(vanbanphaply));
     }
+
+    public async Task CreateVanBanPhapLy(CreateVanBanPhapLyInput input)
+    {
+        var vanbanphaply = ObjectMapper.Map<VanBanPhapLy>(input);
+        await _vanbanphaplyRepository.InsertAsync(vanbanphaply);
+    }
+
 }

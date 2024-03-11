@@ -23,4 +23,12 @@
         // User will prefer to use a payment method with the highest accept value which is a Stripe in this case.
         public const decimal MinimumUpgradePaymentAmount = 1M;
     }
+
+    public class VanBanPhapLyConsts
+    {
+        public const int MaxNameLength = 32;
+        public const int MaxSurnameLength = 32;
+        public const int MaxEmailAddressLength = 255;
+    }
+
 }

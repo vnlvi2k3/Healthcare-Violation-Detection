@@ -41,6 +41,7 @@ using MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments.Dto;
 using MyCompanyName.AbpZeroTemplate.Notifications.Dto;
 using MyCompanyName.AbpZeroTemplate.Organizations.Dto;
 using MyCompanyName.AbpZeroTemplate.Sessions.Dto;
+using MyCompanyName.AbpZeroTemplate.VanBanPhapLyservice.Dto;
 using MyCompanyName.AbpZeroTemplate.WebHooks.Dto;
 using Stripe;
 
@@ -167,6 +168,7 @@ namespace MyCompanyName.AbpZeroTemplate
 
             /* ADD YOUR OWN CUSTOM AUTOMAPPER MAPPINGS HERE */
             configuration.CreateMap<VanBanPhapLy, VanBanPhapLyListDto>();
+            configuration.CreateMap<CreateVanBanPhapLyInput, VanBanPhapLy>();
         }
     }
 }
