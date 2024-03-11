@@ -6,8 +6,8 @@ using MyCompanyName.AbpZeroTemplate.Authorization.Users;
 
 namespace MyCompanyName.AbpZeroTemplate.MyDocument
 {
-    [Table("PbDocuments")]
-    public class Document : FullAuditedEntity
+    [Table("PbOldDocuments")]
+    public class OldDocument : FullAuditedEntity
     {
 
         [Required]
@@ -39,6 +39,10 @@ namespace MyCompanyName.AbpZeroTemplate.MyDocument
 
         [ForeignKey("DVKCBId")]
         public virtual User User { get; set; }
-        public virtual long DVKCBId { get; set; }
+        public virtual long? DVKCBId { get; set; }
+
+        [ForeignKey("DocumentId")]
+        public virtual Document Document { get; set; }
+        public virtual int DocumentId { get; set; }
     }
 }

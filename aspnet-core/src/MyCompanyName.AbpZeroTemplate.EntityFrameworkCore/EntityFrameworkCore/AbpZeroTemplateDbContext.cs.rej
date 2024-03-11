@@ -1,0 +1,10 @@
+diff a/aspnet-core/src/MyCompanyName.AbpZeroTemplate.EntityFrameworkCore/EntityFrameworkCore/AbpZeroTemplateDbContext.cs b/aspnet-core/src/MyCompanyName.AbpZeroTemplate.EntityFrameworkCore/EntityFrameworkCore/AbpZeroTemplateDbContext.cs	(rejected hunks)
+@@ -27,7 +27,7 @@
+ 
+         public virtual DbSet<Document> Documents { get; set; }
+ 
+-        public virtual DbSet<OldDocument> OldDocuments { get; set; }
++//        public virtual DbSet<OldDocument> OldDocuments { get; set; }
+ 
+         public virtual DbSet<SubscribableEdition> SubscribableEditions { get; set; }
+ 

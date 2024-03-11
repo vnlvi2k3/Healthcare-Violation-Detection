@@ -10,7 +10,7 @@ using Abp.Domain.Uow;
 using MyCompanyName.AbpZeroTemplate.Authorization;
 using Abp.Linq.Extensions;
 using Abp.Extensions;
-using MyCompanyName.AbpZeroTemplate.Documents;
+using MyCompanyName.AbpZeroTemplate.MyDocument;
 using MyCompanyName.AbpZeroTemplate.IDocument;
 using MyCompanyName.AbpZeroTemplate.MyDocument;
 \\using MyCompanyName.AbpZeroTemplate.MyDocument.DTO;
