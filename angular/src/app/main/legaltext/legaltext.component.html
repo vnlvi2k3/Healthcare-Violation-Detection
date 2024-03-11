@@ -8,7 +8,7 @@
                     </h3>
                     <span class="kt-subheader__separator kt-subheader__separator--v"></span>
                     <span class="kt-subheader__desc">
-                        {{"Edit Tenant Header Info" | localize}}
+                        <!-- {{"Edit Tenant Header Info" | localize}} -->
                     </span>
                 </div>
                 <div class="kt-subheader__toolbar">
@@ -22,7 +22,23 @@
         <div class="kt-container kt-grid__item kt-grid__item--fluid">
             <div class="kt-portlet kt-portlet--mobile">
                 <div class="kt-portlet__body  kt-portlet__body--fit">
-                    <h3>{{"All Text" | localize}}</h3>
+                    <h3>{{"All Legal Text" | localize}} ({{text.length}})</h3>
+                    <form autocomplete="off">
+                        <div class="kt-form">
+                            <div class="row align-items-center kt-margin-b-10">
+                                <div class="col-xl-12">
+                                    <div class="form-group align-items-center">
+                                        <div class="input-group">
+                                            <input [(ngModel)]="filter" name="filterText" autoFocus class="form-control" [placeholder]="l('SearchWithThreeDot' | localize)" type="text">
+                                            <span class="input-group-btn">
+                                                <button (click)="getText()" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <div class="row kt-row--no-padding align-items-center" *ngFor="let each of text">
                         <div class="col">
                             <h4>{{each.name + ' ' + each.surname}}</h4>
