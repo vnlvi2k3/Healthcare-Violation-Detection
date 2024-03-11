@@ -21,5 +21,6 @@ namespace MyCompanyName.AbpZeroTemplate.LegalText
 
         [MaxLength(MaxEmailAddressLength)]
         public virtual string emailAddress { get; set; }
+
     }
 }

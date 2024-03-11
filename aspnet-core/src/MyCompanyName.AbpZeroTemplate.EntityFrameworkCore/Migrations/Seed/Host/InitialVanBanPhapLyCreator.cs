@@ -15,7 +15,9 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations.Seed.Host
 
         public void Create()
         {
+<<<<<<< HEAD
             var douglas = _context.VanBanPhapLys.FirstOrDefault(p => p.emailAddress == "douglas.adams@fortytwo.com");
+
             if (douglas == null)
             {
                 _context.VanBanPhapLys.Add(

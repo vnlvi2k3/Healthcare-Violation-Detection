@@ -13,6 +13,7 @@ using MyCompanyName.AbpZeroTemplate.MultiTenancy.Accounting;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments;
 using MyCompanyName.AbpZeroTemplate.MyDocument;
 using MyCompanyName.AbpZeroTemplate.Storage;
+using Stripe;
 
 namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
 {
@@ -35,7 +36,7 @@ namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
 
         public virtual DbSet<SubscriptionPayment> SubscriptionPayments { get; set; }
 
-        public virtual DbSet<Invoice> Invoices { get; set; }
+        // public virtual DbSet<Invoice> Invoices { get; set; }
 
         public virtual DbSet<PersistedGrantEntity> PersistedGrants { get; set; }
 
