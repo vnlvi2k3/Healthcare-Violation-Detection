@@ -26,7 +26,7 @@ using MyCompanyName.AbpZeroTemplate.Authorization.Users.Profile.Dto;
 using MyCompanyName.AbpZeroTemplate.Chat;
 using MyCompanyName.AbpZeroTemplate.Chat.Dto;
 //using MyCompanyName.AbpZeroTemplate.Documents;
-//using MyCompanyName.AbpZeroTemplate.MyDocument.DTO;
+using MyCompanyName.AbpZeroTemplate.MyDocument.DTO;
 using MyCompanyName.AbpZeroTemplate.MyDocument;
 using MyCompanyName.AbpZeroTemplate.DynamicEntityProperties.Dto;
 using MyCompanyName.AbpZeroTemplate.Editions;
