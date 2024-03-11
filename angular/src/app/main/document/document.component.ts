@@ -8,14 +8,12 @@ import { DocumentServiceProxy, DocumentListDto, ListResultDtoOfDocumentListDto }
     animations: [appModuleAnimation()]
 })
 
-export class DocumentComponent extends AppComponentBase {
 export class DocumentComponent extends AppComponentBase{
 
     document: DocumentListDto[] = [];
     filter: string = '';
 
     constructor(
-        injector: Injector
         injector: Injector,
         private _documentService: DocumentServiceProxy
     ) {
