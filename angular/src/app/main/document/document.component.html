@@ -1,19 +1,82 @@
-<button
-    id="deleteDocument"
-    (click)="deleteDocument(13)"
-    title="{{ 'Delete' | localize }}"
-    class="btn btn-danger btn-outline-hover-danger btn-icon"
-    href="javascript:;"
->
-    <i class="fa fa-times"></i>
-</button>
-
-<button
-    id="restoreDocument"
-    (click)="restoreDocument(13)"
-    title="{{ 'Restore' | localize }}"
-    class="btn btn-primary btn-outline-hover-primary btn-icon"
-    href="javascript:;"
->
-    <i class="fa fa-spinner" aria-hidden="true"></i>
-</button>
+<div [@routerTransition]>
+    <div class="content d-flex flex-column flex-column-fluid p-5">
+        <div class="card-header align-items-center border-0 mb-5">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <span>{{ 'My Document' | localize }}</span>
+                    </h3>
+                </div>
+                <div class="input-group row" style="width: 50%">
+                    <div class="col-12 d-flex">
+                        <input
+                            id="TenantNameOrTenancyCode"
+                            [(ngModel)]="filter"
+                            name="filterText"
+                            class="form-control"
+                            placeholder="{{ 'SearchWithThreeDot' | localize }}"
+                            type="text"
+                        />
+                        <button class="btn btn-primary" type="submit" (click)="getDocument()">
+                            <i class="flaticon-search-1" [attr.aria-label]="l('Search')"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button
+                            *ngIf="'Pages.Tenant.Document.Action' | permission"
+                            class="btn btn-primary"
+                        >
+                            <i class="fa fa-plus"></i>
+                            {{ 'Create New Document' | localize }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-block mb-5 d-flex flex-column gap-3">
+            <div class="card card-custom gutter-b" *ngFor="let each of document">
+                <div class="card-body d-flex">
+                    <div class="row">
+                        <h4>{{ each.title}}</h4>
+                        <span>{{ each.description }}</span>
+                    </div>
+                    <div class="ms-auto">
+                        <button
+                            id="previewDocument"
+                            title="{{ 'Preview' | localize }}"
+                            class="btn btn-primary btn-outline-hover-danger btn-icon"
+                        >
+                            <i class="fa fa-eye"></i>
+                        </button>
+                        <button
+                            id="downloadDocument"
+                            title="{{ 'Download' | localize }}"
+                            class="btn btn-primary btn-outline-hover-danger btn-icon"
+                        >
+                            <i class="fa fa-download"></i>
+                        </button>
+                        <button
+                            *ngIf="'Pages.Tenant.Document.Action' | permission"
+                            id="editDocument"
+                            title="{{ 'Edit' | localize }}"
+                            class="btn btn-warning btn-outline-hover-danger btn-icon"
+                        >
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button
+                            *ngIf="'Pages.Tenant.Document.Action' | permission"
+                            id="deleteDocument"
+                            title="{{ 'Delete' | localize }}"
+                            class="btn btn-danger btn-outline-hover-danger btn-icon"
+                            href="javascript:;"
+                        >
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
