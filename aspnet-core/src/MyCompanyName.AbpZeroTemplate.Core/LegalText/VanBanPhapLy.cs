@@ -13,13 +13,13 @@ namespace MyCompanyName.AbpZeroTemplate.LegalText
 
         [Required]
         [MaxLength(MaxNameLength)]
-        public virtual string Name { get; set; }
+        public virtual string name { get; set; }
 
         [Required]
         [MaxLength(MaxSurnameLength)]
-        public virtual string Surname { get; set; }
+        public virtual string surname { get; set; }
 
         [MaxLength(MaxEmailAddressLength)]
-        public virtual string EmailAddress { get; set; }
+        public virtual string emailAddress { get; set; }
     }
 }

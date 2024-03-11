@@ -28,12 +28,12 @@ public class VanBanPhapLyAppService : AbpZeroTemplateAppServiceBase, IVanBanPhap
             .GetAll()
             .WhereIf(
                 !input.Filter.IsNullOrEmpty(),
-                p => p.Name.Contains(input.Filter) ||
-                     p.Surname.Contains(input.Filter) ||
-                     p.EmailAddress.Contains(input.Filter)
+                p => p.name.Contains(input.Filter) ||
+                     p.surname.Contains(input.Filter) ||
+                     p.emailAddress.Contains(input.Filter)
             )
-            .OrderBy(p => p.Name)
-            .ThenBy(p => p.Surname)
+            .OrderBy(p => p.name)
+            .ThenBy(p => p.surname)
             .ToList();
 
         return new ListResultDto<VanBanPhapLyListDto>(ObjectMapper.Map<List<VanBanPhapLyListDto>>(vanbanphaply));

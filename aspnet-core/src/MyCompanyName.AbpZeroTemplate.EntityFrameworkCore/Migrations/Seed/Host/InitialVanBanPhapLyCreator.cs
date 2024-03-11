@@ -15,27 +15,27 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations.Seed.Host
 
         public void Create()
         {
-            var douglas = _context.VanBanPhapLys.FirstOrDefault(p => p.EmailAddress == "douglas.adams@fortytwo.com");
+            var douglas = _context.VanBanPhapLys.FirstOrDefault(p => p.emailAddress == "douglas.adams@fortytwo.com");
             if (douglas == null)
             {
                 _context.VanBanPhapLys.Add(
                     new VanBanPhapLy
                     {
-                        Name = "Douglas",
-                        Surname = "Adams",
-                        EmailAddress = "douglas.adams@fortytwo.com"
+                        name = "Douglas",
+                        surname = "Adams",
+                        emailAddress = "douglas.adams@fortytwo.com"
                     });
             }
 
-            var asimov = _context.VanBanPhapLys.FirstOrDefault(p => p.EmailAddress == "isaac.asimov@foundation.org");
+            var asimov = _context.VanBanPhapLys.FirstOrDefault(p => p.emailAddress == "isaac.asimov@foundation.org");
             if (asimov == null)
             {
                 _context.VanBanPhapLys.Add(
                     new VanBanPhapLy
                     {
-                        Name = "Isaac",
-                        Surname = "Asimov",
-                        EmailAddress = "isaac.asimov@foundation.org"
+                        name = "Isaac",
+                        surname = "Asimov",
+                        emailAddress = "isaac.asimov@foundation.org"
                     });
             }
         }
