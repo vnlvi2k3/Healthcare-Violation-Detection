@@ -51,7 +51,7 @@
     </div>
 </div> -->
 
-<div [@routerTransition]>
+<!-- <div [@routerTransition]>
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-12">
@@ -90,4 +90,57 @@
         </div>
         <createTextModal #createTextModal (modalSave)="getText()"></createTextModal>
     </div>
+</div> -->
+
+<div [@routerTransition]>
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <h3 class="page-title">{{ "Legal Text" | localize }}</h3>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">{{ "All Legal Text" | localize }} ({{ text.length }})</h4>
+                    </div>
+                    <div class="card-body">
+                        <form autocomplete="off" (submit)="getText()">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input [(ngModel)]="filter" name="filterText" class="form-control" placeholder="{{ 'SearchWithThreeDot' | localize }}" type="text">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                                        <!-- Advanced Search Button -->
+                                        <button class="btn btn-secondary" type="button" (click)="toggleAdvancedSearch()">
+                                            <i class="fas fa-cogs"></i> {{ 'Advanced' | localize }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- Date Range Inputs (Initially Hidden) -->
+                             <div class="form-group" *ngIf="showDateRange">
+                                <label for="startDate">From:</label>
+                                <input type="date" id="startDate" class="form-control">
+                                <label for="endDate">To:</label>
+                                <input type="date" id="endDate" class="form-control">
+                            </div>
+                            <!-- Existing content -->
+                        </form>
+                        <div class="col">
+                            <div class="row-lg-4 row-md-6 row-sm-12" *ngFor="let each of text">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{ each.name + ' ' + each.surname }}</h4>
+                                        <p class="card-text">{{ each.emailAddress }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <createTextModal #createTextModal (modalSave)="getText()"></createTextModal>
+    </div>
 </div>
+

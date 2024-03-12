@@ -33,4 +33,9 @@ export class LegalTextComponent extends AppComponentBase implements OnInit {
             this.text = result.items;
         });
     }
+
+    showDateRange: boolean = false
+    toggleAdvancedSearch() {
+        this.showDateRange = !this.showDateRange;
+    }
 }
