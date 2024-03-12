@@ -3,7 +3,6 @@ import { AppComponentBase } from '@shared/common/app-component-base';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { DocumentServiceProxy, DocumentListDto, ListResultDtoOfDocumentListDto } from '@shared/service-proxies/service-proxies';
 
-
 @Component({
     templateUrl: './document.component.html',
     animations: [appModuleAnimation()]
@@ -30,6 +29,5 @@ export class DocumentComponent extends AppComponentBase{
             this.document = result.items;
         });
     }
-
 
 }

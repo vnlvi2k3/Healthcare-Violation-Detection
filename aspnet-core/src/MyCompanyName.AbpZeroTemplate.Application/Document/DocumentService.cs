@@ -42,8 +42,7 @@ namespace MyCompanyName.AbpZeroTemplate.DocumentService
                 .WhereIf(
                 !input.Filter.IsNullOrEmpty(),
                 p => p.title.Contains(input.Filter) ||
-                     p.code.Contains(input.Filter) ||
-                     p.description.Contains(input.Filter)
+                     p.description.Contains(input.Filter) 
             )
             .OrderBy(p => p.title)
             .ThenBy(p => p.description)
