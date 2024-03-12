@@ -5,7 +5,6 @@ import { DocumentServiceProxy, DocumentListDto, ListResultDtoOfDocumentListDto }
 import { HttpClient } from '@angular/common/http';
 import { AppConsts } from '@shared/AppConsts';
 
-
 @Component({
     templateUrl: './document.component.html',
     styleUrls: ['./document.component.css'],
