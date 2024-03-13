@@ -79,7 +79,7 @@ namespace MyCompanyName.AbpZeroTemplate.DocumentService
         }
 
         [HttpGet]
-        public ListResultDto<DocumentListDto> Search(GetDocumentInput input, int option, DateTime? dateValid, DateTime? dateExpire)
+        public ListResultDto<DocumentListDto> Search(GetDocumentInput input, int option, string str_dateValid, string str_dateExpire)
         {
             var query = _documentRepository.GetAll();
 
@@ -98,16 +98,29 @@ namespace MyCompanyName.AbpZeroTemplate.DocumentService
                     p.showed.ToString().Contains(input.Filter));
             }
 
+            DateTime? dateValid = null;
+            DateTime? dateExpire = null;
+
+            if (!str_dateValid.IsNullOrEmpty())
+            {
+                dateValid = DateTime.Parse(str_dateValid);
+            }
+
+            if(!str_dateExpire.IsNullOrEmpty())
+            {
+                dateExpire = DateTime.Parse(str_dateExpire);
+            }
+
             switch (option)
             {
                 case 1: // Advanced Search with date valid
-                    if (dateValid != null)
+                    if (dateValid != null && dateExpire == null)
                     {
                         query = query.Where(p => p.validation == dateValid);
                     }
                     break;
                 case 2: // Advanced Search with date expire
-                    if (dateExpire != null)
+                    if (dateExpire != null && dateValid == null)
                     {
                         query = query.Where(p => p.expiration == dateExpire);
                     }
@@ -138,6 +151,5 @@ namespace MyCompanyName.AbpZeroTemplate.DocumentService
 
             return new ListResultDto<DocumentListDto>(ObjectMapper.Map<List<DocumentListDto>>(document));
         }
-
-    }
+    };
 }

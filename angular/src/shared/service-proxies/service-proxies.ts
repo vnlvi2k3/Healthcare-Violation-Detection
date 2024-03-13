@@ -2954,11 +2954,11 @@ export class DocumentServiceProxy {
     /**
      * @param filter (optional) 
      * @param option (optional) 
-     * @param dateValid (optional) 
-     * @param dateExpire (optional) 
+     * @param str_dateValid (optional) 
+     * @param str_dateExpire (optional) 
      * @return Success
      */
-    search(filter: string | undefined, option: number | undefined, dateValid: DateTime | undefined, dateExpire: DateTime | undefined): Observable<ListResultDtoOfDocumentListDto> {
+    search(filter: string | undefined, option: number | undefined, str_dateValid: string | undefined, str_dateExpire: string | undefined): Observable<ListResultDtoOfDocumentListDto> {
         let url_ = this.baseUrl + "/api/services/app/Document/Search?";
         if (filter === null)
             throw new Error("The parameter 'filter' cannot be null.");
@@ -2968,14 +2968,14 @@ export class DocumentServiceProxy {
             throw new Error("The parameter 'option' cannot be null.");
         else if (option !== undefined)
             url_ += "option=" + encodeURIComponent("" + option) + "&";
-        if (dateValid === null)
-            throw new Error("The parameter 'dateValid' cannot be null.");
-        else if (dateValid !== undefined)
-            url_ += "dateValid=" + encodeURIComponent(dateValid ? "" + dateValid.toJSON() : "") + "&";
-        if (dateExpire === null)
-            throw new Error("The parameter 'dateExpire' cannot be null.");
-        else if (dateExpire !== undefined)
-            url_ += "dateExpire=" + encodeURIComponent(dateExpire ? "" + dateExpire.toJSON() : "") + "&";
+        if (str_dateValid === null)
+            throw new Error("The parameter 'str_dateValid' cannot be null.");
+        else if (str_dateValid !== undefined)
+            url_ += "str_dateValid=" + encodeURIComponent("" + str_dateValid) + "&";
+        if (str_dateExpire === null)
+            throw new Error("The parameter 'str_dateExpire' cannot be null.");
+        else if (str_dateExpire !== undefined)
+            url_ += "str_dateExpire=" + encodeURIComponent("" + str_dateExpire) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
