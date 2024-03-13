@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using MyCompanyName.AbpZeroTemplate.Authorization.Users;
+using MyCompanyName.AbpZeroTemplate.Authorization.Users.Dto;
 
 
 namespace MyCompanyName.AbpZeroTemplate.MyDocument.DTO
@@ -19,10 +20,8 @@ namespace MyCompanyName.AbpZeroTemplate.MyDocument.DTO
     {
         public  string code { get; set; }
 
-        
         public  string title { get; set; }
 
-       
         public  string description { get; set; }
 
         public  DateTime validation { get; set; }

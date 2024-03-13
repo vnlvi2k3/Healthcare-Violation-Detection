@@ -37,8 +37,8 @@ namespace MyCompanyName.AbpZeroTemplate.MyDocument
 
         public virtual bool showed { get; set; }
 
-        // [ForeignKey("DVKCBId")]
-        // public virtual User User { get; set; }
+        [ForeignKey("DVKCBId")]
+        public virtual User User { get; set; }
         public virtual long DVKCBId { get; set; }
     }
 }
