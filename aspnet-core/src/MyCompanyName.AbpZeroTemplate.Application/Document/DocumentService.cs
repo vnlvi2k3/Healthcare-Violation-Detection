@@ -27,11 +27,11 @@ namespace MyCompanyName.AbpZeroTemplate.DocumentService
         }
 
         [AbpAuthorize(AppPermissions.Pages_Tenant_Document_DeleteRestore)]
-        public async Task RestoreDocument(EntityDto input)
+        public async Task RestoreDocument(int input)
         {
             using (UnitOfWorkManager.Current.DisableFilter(AbpDataFilters.SoftDelete))
             {
-                var document = await _documentRepository.GetAsync(input.Id);
+                var document = await _documentRepository.GetAsync(input);
                 document.IsDeleted = false;
                 await _documentRepository.UpdateAsync(document);
             }

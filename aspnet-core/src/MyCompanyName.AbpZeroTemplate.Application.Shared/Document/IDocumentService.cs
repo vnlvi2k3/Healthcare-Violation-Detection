@@ -8,6 +8,6 @@ namespace MyCompanyName.AbpZeroTemplate.IDocument
     {
         Task DeleteDocument(EntityDto input);
 
-        Task RestoreDocument(EntityDto input);
+        Task RestoreDocument(int input);
     }
 }
