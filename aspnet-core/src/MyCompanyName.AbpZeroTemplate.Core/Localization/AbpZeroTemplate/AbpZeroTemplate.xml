@@ -2,6 +2,7 @@
 <localizationDictionary culture="en">
   <texts>
     <text name="HomePage">Home page</text>
+	<text name="Document">Document</text>
     <text name="AboutUs">About us</text>
     <text name="Administration">Administration</text>
     <text name="Roles">Roles</text>
