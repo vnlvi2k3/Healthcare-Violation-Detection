@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
-import { VanBanPhapLyServiceProxy, VanBanPhapLyListDto, ListResultDtoOfVanBanPhapLyListDto } from '@shared/service-proxies/service-proxies';
+import { VanBanPhapLyServiceProxy, VanBanPhapLyListDto, ListResultDtoOfVanBanPhapLyListDto, DocumentServiceProxy } from '@shared/service-proxies/service-proxies';
 
 @Component({
     templateUrl: './legaltext.component.html',
@@ -19,7 +19,8 @@ export class LegalTextComponent extends AppComponentBase implements OnInit {
 
     constructor(
         injector: Injector,
-        private _vanbanphaplyService: VanBanPhapLyServiceProxy
+        private _vanbanphaplyService: VanBanPhapLyServiceProxy,
+        private _documentService: DocumentServiceProxy
     ) {
         super(injector);
     }
