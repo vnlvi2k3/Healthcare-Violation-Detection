@@ -103,12 +103,30 @@ namespace MyCompanyName.AbpZeroTemplate.DocumentService
 
             if (!str_dateValid.IsNullOrEmpty())
             {
-                dateValid = DateTime.Parse(str_dateValid);
+                try
+                {
+                    // If parsing succeeds, dateValid will contain the parsed DateTime value
+                    dateValid = DateTime.Parse(str_dateValid);
+                }
+                catch (FormatException ex)
+                {
+                    // Handle the exception caused by an incorrect format in str_dateValid
+                    dateValid = DateTime.MinValue;
+                }
             }
 
             if(!str_dateExpire.IsNullOrEmpty())
             {
-                dateExpire = DateTime.Parse(str_dateExpire);
+                try
+                {
+                    // If parsing succeeds, dateExpire will contain the parsed DateTime value
+                    dateExpire = DateTime.Parse(str_dateExpire);
+                }
+                catch (FormatException ex)
+                {
+                    // Handle the exception caused by an incorrect format in str_dateExpire
+                    dateExpire = DateTime.MinValue;
+                }
             }
 
             switch (option)

@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LegalTextComponent} from './legaltext.component';
+import {QuanlyvanbanComponent} from './quanlyvanban.component';
 
 const routes: Routes = [{
     path: '',
-    component: LegalTextComponent,
+    component: QuanlyvanbanComponent,
     pathMatch: 'full'
 }];
 
@@ -12,4 +12,4 @@ const routes: Routes = [{
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class LegalTextRoutingModule {}
+export class QuanlyvanbanRoutingModule {}

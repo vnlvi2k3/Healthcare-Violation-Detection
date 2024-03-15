@@ -12,12 +12,11 @@ namespace MyCompanyName.AbpZeroTemplate.MyDocument
     {
         ListResultDto<DocumentListDto> GetDocument(GetDocumentInput input);
 
-        ListResultDto<DocumentListDto> Search(GetDocumentInput input, int option = 0, DateTime? dateValid = null, DateTime? dateExpire = null);
+        // ListResultDto<DocumentListDto> Search(GetDocumentInput input, int option = 0, DateTime? dateValid = null, DateTime? dateExpire = null);
 
         Task DeleteDocument(EntityDto input);
 
         Task RestoreDocument(int input);
-        // ListResultDto<DocumentListDto> Search(GetDocumentInput input, int option = 0, DateTime? dateValid = null, DateTime? dateExpire = null);
 
         ListResultDto<DocumentListDto> Search(GetDocumentInput input, int option = 0, string str_dateValid = "", string str_dateExpire = "");
     }
