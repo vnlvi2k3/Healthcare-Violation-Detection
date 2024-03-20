@@ -67,3 +67,12 @@
     </div>
     <UploadfileModal #uploadFileModal (modalSave)="getDocument()"></UploadfileModal>
 </div>
+<button
+    id="restoreDocument"
+    (click)="restoreDocument(13)"
+    title="{{ 'Restore' | localize }}"
+    class="btn btn-primary btn-outline-hover-primary btn-icon"
+    href="javascript:;"
+>
+    <i class="fa fa-spinner" aria-hidden="true"></i>
+</button>
