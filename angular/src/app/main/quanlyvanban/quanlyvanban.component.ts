@@ -53,17 +53,17 @@ export class QuanlyvanbanComponent extends AppComponentBase implements OnInit {
     this.filter = '';
     this.validDate = '';
     this.expireDate = '';
-    // this.getDoc();
+    this.getSearch();
   }
 
   // Function to perform basic search
   getSearch(): void{
-    if((this.validDate != '') && (this.expireDate == '')){
+    if((this.validDate != '') && (this.expireDate == '' || this.expireDate == null)){
       this._documentService.search(this.filter, 1, this.validDate, this.expireDate).subscribe((result) => {
           this.data = result.items;
       })
     }
-    else if(this.validDate == '' && this.expireDate != ''){
+    else if((this.validDate == '' || this.validDate == null) && this.expireDate != ''){
       this._documentService.search(this.filter, 2, this.validDate, this.expireDate).subscribe((result) => {
           this.data = result.items;
       })
