@@ -7,7 +7,6 @@ using MyCompanyName.AbpZeroTemplate.Authorization.Users;
 using MyCompanyName.AbpZeroTemplate.Chat;
 using MyCompanyName.AbpZeroTemplate.Editions;
 using MyCompanyName.AbpZeroTemplate.Friendships;
-using MyCompanyName.AbpZeroTemplate.LegalText;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Accounting;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments;
@@ -19,7 +18,6 @@ namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
     public class AbpZeroTemplateDbContext : AbpZeroDbContext<Tenant, Role, User, AbpZeroTemplateDbContext>, IAbpPersistedGrantDbContext
     {
         /* Define an IDbSet for each entity of the application */
-        public virtual DbSet<VanBanPhapLy> VanBanPhapLys { get; set; }
 
         public virtual DbSet<BinaryObject> BinaryObjects { get; set; }
 

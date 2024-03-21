@@ -32,7 +32,6 @@ using MyCompanyName.AbpZeroTemplate.Editions.Dto;
 using MyCompanyName.AbpZeroTemplate.Friendships;
 using MyCompanyName.AbpZeroTemplate.Friendships.Cache;
 using MyCompanyName.AbpZeroTemplate.Friendships.Dto;
-using MyCompanyName.AbpZeroTemplate.LegalText;
 using MyCompanyName.AbpZeroTemplate.Localization.Dto;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Dto;
@@ -43,7 +42,6 @@ using MyCompanyName.AbpZeroTemplate.MyDocument;
 using MyCompanyName.AbpZeroTemplate.Notifications.Dto;
 using MyCompanyName.AbpZeroTemplate.Organizations.Dto;
 using MyCompanyName.AbpZeroTemplate.Sessions.Dto;
-using MyCompanyName.AbpZeroTemplate.VanBanPhapLyservice.Dto;
 using MyCompanyName.AbpZeroTemplate.WebHooks.Dto;
 using Stripe;
 //using System.Reflection.Metadata;
@@ -170,8 +168,6 @@ namespace MyCompanyName.AbpZeroTemplate
             configuration.CreateMap<CreateUserDelegationDto, UserDelegation>();
 
             /* ADD YOUR OWN CUSTOM AUTOMAPPER MAPPINGS HERE */
-            configuration.CreateMap<VanBanPhapLy, VanBanPhapLyListDto>();
-            configuration.CreateMap<CreateVanBanPhapLyInput, VanBanPhapLy>();
             configuration.CreateMap<Document, DocumentListDto>();
         }
     }

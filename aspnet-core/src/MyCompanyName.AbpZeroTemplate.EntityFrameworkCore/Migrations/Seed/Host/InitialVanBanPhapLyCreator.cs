@@ -1,5 +1,4 @@
 ﻿using MyCompanyName.AbpZeroTemplate.EntityFrameworkCore;
-using MyCompanyName.AbpZeroTemplate.LegalText;
 using MyCompanyName.AbpZeroTemplate.MyDocument;
 using System.Linq;
 using System.Reflection.Metadata;
