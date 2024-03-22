@@ -2894,6 +2894,133 @@ export class DocumentServiceProxy {
         }
         return _observableOf<void>(<any>null);
     }
+
+    /**
+     * @param filter (optional) 
+     * @return Success
+     */
+    getDocument(filter: string | undefined): Observable<ListResultDtoOfDocumentListDto> {
+        let url_ = this.baseUrl + "/api/services/app/Document/GetDocument?";
+        if (filter === null)
+            throw new Error("The parameter 'filter' cannot be null.");
+        else if (filter !== undefined)
+            url_ += "Filter=" + encodeURIComponent("" + filter) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDocument(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDocument(<any>response_);
+                } catch (e) {
+                    return <Observable<ListResultDtoOfDocumentListDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ListResultDtoOfDocumentListDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetDocument(response: HttpResponseBase): Observable<ListResultDtoOfDocumentListDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ListResultDtoOfDocumentListDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ListResultDtoOfDocumentListDto>(<any>null);
+    }
+
+    /**
+     * @param filter (optional) 
+     * @param option (optional) 
+     * @param str_dateValid (optional) 
+     * @param str_dateExpire (optional) 
+     * @return Success
+     */
+    search(filter: string | undefined, option: number | undefined, str_dateValid: string | undefined, str_dateExpire: string | undefined): Observable<ListResultDtoOfDocumentListDto> {
+        let url_ = this.baseUrl + "/api/services/app/Document/Search?";
+        if (filter === null)
+            throw new Error("The parameter 'filter' cannot be null.");
+        else if (filter !== undefined)
+            url_ += "Filter=" + encodeURIComponent("" + filter) + "&";
+        if (option === null)
+            throw new Error("The parameter 'option' cannot be null.");
+        else if (option !== undefined)
+            url_ += "option=" + encodeURIComponent("" + option) + "&";
+        if (str_dateValid === null)
+            throw new Error("The parameter 'str_dateValid' cannot be null.");
+        else if (str_dateValid !== undefined)
+            url_ += "str_dateValid=" + encodeURIComponent("" + str_dateValid) + "&";
+        if (str_dateExpire === null)
+            throw new Error("The parameter 'str_dateExpire' cannot be null.");
+        else if (str_dateExpire !== undefined)
+            url_ += "str_dateExpire=" + encodeURIComponent("" + str_dateExpire) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSearch(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSearch(<any>response_);
+                } catch (e) {
+                    return <Observable<ListResultDtoOfDocumentListDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ListResultDtoOfDocumentListDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processSearch(response: HttpResponseBase): Observable<ListResultDtoOfDocumentListDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ListResultDtoOfDocumentListDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ListResultDtoOfDocumentListDto>(<any>null);
+    }
 }
 
 @Injectable()
@@ -13775,6 +13902,126 @@ export class UserLoginServiceProxy {
 }
 
 @Injectable()
+export class VanBanPhapLyServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param filter (optional) 
+     * @return Success
+     */
+    getVanBanPhapLy(filter: string | undefined): Observable<ListResultDtoOfVanBanPhapLyListDto> {
+        let url_ = this.baseUrl + "/api/services/app/VanBanPhapLy/GetVanBanPhapLy?";
+        if (filter === null)
+            throw new Error("The parameter 'filter' cannot be null.");
+        else if (filter !== undefined)
+            url_ += "Filter=" + encodeURIComponent("" + filter) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetVanBanPhapLy(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetVanBanPhapLy(<any>response_);
+                } catch (e) {
+                    return <Observable<ListResultDtoOfVanBanPhapLyListDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ListResultDtoOfVanBanPhapLyListDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetVanBanPhapLy(response: HttpResponseBase): Observable<ListResultDtoOfVanBanPhapLyListDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ListResultDtoOfVanBanPhapLyListDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ListResultDtoOfVanBanPhapLyListDto>(<any>null);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    createVanBanPhapLy(body: CreateVanBanPhapLyInput | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/VanBanPhapLy/CreateVanBanPhapLy";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateVanBanPhapLy(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateVanBanPhapLy(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreateVanBanPhapLy(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+}
+
+@Injectable()
 export class WebhookEventServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -16363,6 +16610,50 @@ export interface ICreateUserDelegationDto {
     endTime: DateTime;
 }
 
+export class CreateVanBanPhapLyInput implements ICreateVanBanPhapLyInput {
+    name!: string;
+    surname!: string;
+    emailAddress!: string | undefined;
+
+    constructor(data?: ICreateVanBanPhapLyInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.surname = _data["surname"];
+            this.emailAddress = _data["emailAddress"];
+        }
+    }
+
+    static fromJS(data: any): CreateVanBanPhapLyInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateVanBanPhapLyInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["surname"] = this.surname;
+        data["emailAddress"] = this.emailAddress;
+        return data; 
+    }
+}
+
+export interface ICreateVanBanPhapLyInput {
+    name: string;
+    surname: string;
+    emailAddress: string | undefined;
+}
+
 export class CurrentUserProfileEditDto implements ICurrentUserProfileEditDto {
     name!: string;
     surname!: string;
@@ -16597,6 +16888,118 @@ export class DelegatedImpersonateInput implements IDelegatedImpersonateInput {
 
 export interface IDelegatedImpersonateInput {
     userDelegationId: number;
+}
+
+export class DocumentListDto implements IDocumentListDto {
+    code!: string | undefined;
+    title!: string | undefined;
+    description!: string | undefined;
+    validation!: DateTime;
+    expiration!: DateTime;
+    published!: boolean;
+    fullText!: string | undefined;
+    approved!: boolean;
+    medical_product!: string | undefined;
+    province!: string | undefined;
+    showed!: boolean;
+    dvkcbId!: number;
+    isDeleted!: boolean;
+    deleterUserId!: number | undefined;
+    deletionTime!: DateTime | undefined;
+    lastModificationTime!: DateTime | undefined;
+    lastModifierUserId!: number | undefined;
+    creationTime!: DateTime;
+    creatorUserId!: number | undefined;
+    id!: number;
+
+    constructor(data?: IDocumentListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.code = _data["code"];
+            this.title = _data["title"];
+            this.description = _data["description"];
+            this.validation = _data["validation"] ? DateTime.fromISO(_data["validation"].toString()) : <any>undefined;
+            this.expiration = _data["expiration"] ? DateTime.fromISO(_data["expiration"].toString()) : <any>undefined;
+            this.published = _data["published"];
+            this.fullText = _data["fullText"];
+            this.approved = _data["approved"];
+            this.medical_product = _data["medical_product"];
+            this.province = _data["province"];
+            this.showed = _data["showed"];
+            this.dvkcbId = _data["dvkcbId"];
+            this.isDeleted = _data["isDeleted"];
+            this.deleterUserId = _data["deleterUserId"];
+            this.deletionTime = _data["deletionTime"] ? DateTime.fromISO(_data["deletionTime"].toString()) : <any>undefined;
+            this.lastModificationTime = _data["lastModificationTime"] ? DateTime.fromISO(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.lastModifierUserId = _data["lastModifierUserId"];
+            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creatorUserId = _data["creatorUserId"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): DocumentListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new DocumentListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["code"] = this.code;
+        data["title"] = this.title;
+        data["description"] = this.description;
+        data["validation"] = this.validation ? this.validation.toString() : <any>undefined;
+        data["expiration"] = this.expiration ? this.expiration.toString() : <any>undefined;
+        data["published"] = this.published;
+        data["fullText"] = this.fullText;
+        data["approved"] = this.approved;
+        data["medical_product"] = this.medical_product;
+        data["province"] = this.province;
+        data["showed"] = this.showed;
+        data["dvkcbId"] = this.dvkcbId;
+        data["isDeleted"] = this.isDeleted;
+        data["deleterUserId"] = this.deleterUserId;
+        data["deletionTime"] = this.deletionTime ? this.deletionTime.toString() : <any>undefined;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toString() : <any>undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creatorUserId"] = this.creatorUserId;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface IDocumentListDto {
+    code: string | undefined;
+    title: string | undefined;
+    description: string | undefined;
+    validation: DateTime;
+    expiration: DateTime;
+    published: boolean;
+    fullText: string | undefined;
+    approved: boolean;
+    medical_product: string | undefined;
+    province: string | undefined;
+    showed: boolean;
+    dvkcbId: number;
+    isDeleted: boolean;
+    deleterUserId: number | undefined;
+    deletionTime: DateTime | undefined;
+    lastModificationTime: DateTime | undefined;
+    lastModifierUserId: number | undefined;
+    creationTime: DateTime;
+    creatorUserId: number | undefined;
+    id: number;
 }
 
 export class DynamicEntityPropertyDto implements IDynamicEntityPropertyDto {
@@ -21692,6 +22095,50 @@ export interface IListResultDtoOfChatMessageDto {
     items: ChatMessageDto[] | undefined;
 }
 
+export class ListResultDtoOfDocumentListDto implements IListResultDtoOfDocumentListDto {
+    items!: DocumentListDto[] | undefined;
+
+    constructor(data?: IListResultDtoOfDocumentListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(DocumentListDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListResultDtoOfDocumentListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ListResultDtoOfDocumentListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IListResultDtoOfDocumentListDto {
+    items: DocumentListDto[] | undefined;
+}
+
 export class ListResultDtoOfDynamicEntityPropertyDto implements IListResultDtoOfDynamicEntityPropertyDto {
     items!: DynamicEntityPropertyDto[] | undefined;
 
@@ -22350,6 +22797,50 @@ export class ListResultDtoOfSubscribableEditionComboboxItemDto implements IListR
 
 export interface IListResultDtoOfSubscribableEditionComboboxItemDto {
     items: SubscribableEditionComboboxItemDto[] | undefined;
+}
+
+export class ListResultDtoOfVanBanPhapLyListDto implements IListResultDtoOfVanBanPhapLyListDto {
+    items!: VanBanPhapLyListDto[] | undefined;
+
+    constructor(data?: IListResultDtoOfVanBanPhapLyListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(VanBanPhapLyListDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListResultDtoOfVanBanPhapLyListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ListResultDtoOfVanBanPhapLyListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IListResultDtoOfVanBanPhapLyListDto {
+    items: VanBanPhapLyListDto[] | undefined;
 }
 
 export class LocalizableComboboxItemDto implements ILocalizableComboboxItemDto {
@@ -28160,6 +28651,82 @@ export class UsersToOrganizationUnitInput implements IUsersToOrganizationUnitInp
 export interface IUsersToOrganizationUnitInput {
     userIds: number[] | undefined;
     organizationUnitId: number;
+}
+
+export class VanBanPhapLyListDto implements IVanBanPhapLyListDto {
+    name!: string | undefined;
+    surname!: string | undefined;
+    emailAddress!: string | undefined;
+    isDeleted!: boolean;
+    deleterUserId!: number | undefined;
+    deletionTime!: DateTime | undefined;
+    lastModificationTime!: DateTime | undefined;
+    lastModifierUserId!: number | undefined;
+    creationTime!: DateTime;
+    creatorUserId!: number | undefined;
+    id!: number;
+
+    constructor(data?: IVanBanPhapLyListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.surname = _data["surname"];
+            this.emailAddress = _data["emailAddress"];
+            this.isDeleted = _data["isDeleted"];
+            this.deleterUserId = _data["deleterUserId"];
+            this.deletionTime = _data["deletionTime"] ? DateTime.fromISO(_data["deletionTime"].toString()) : <any>undefined;
+            this.lastModificationTime = _data["lastModificationTime"] ? DateTime.fromISO(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.lastModifierUserId = _data["lastModifierUserId"];
+            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creatorUserId = _data["creatorUserId"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): VanBanPhapLyListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new VanBanPhapLyListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["surname"] = this.surname;
+        data["emailAddress"] = this.emailAddress;
+        data["isDeleted"] = this.isDeleted;
+        data["deleterUserId"] = this.deleterUserId;
+        data["deletionTime"] = this.deletionTime ? this.deletionTime.toString() : <any>undefined;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toString() : <any>undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creatorUserId"] = this.creatorUserId;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface IVanBanPhapLyListDto {
+    name: string | undefined;
+    surname: string | undefined;
+    emailAddress: string | undefined;
+    isDeleted: boolean;
+    deleterUserId: number | undefined;
+    deletionTime: DateTime | undefined;
+    lastModificationTime: DateTime | undefined;
+    lastModifierUserId: number | undefined;
+    creationTime: DateTime;
+    creatorUserId: number | undefined;
+    id: number;
 }
 
 export class VerifySmsCodeInputDto implements IVerifySmsCodeInputDto {

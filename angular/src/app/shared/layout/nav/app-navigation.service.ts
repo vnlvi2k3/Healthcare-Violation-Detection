@@ -20,7 +20,8 @@ export class AppNavigationService {
                 'flaticon-line-graph',
                 '/app/admin/hostDashboard'
             ),
-            new AppMenuItem("Document", null, "flaticon-book", "/app/main/document"),
+
+            new AppMenuItem("Quanlyvanban", null, "flaticon-book", "/app/main/quan-ly-van-ban"),
             new AppMenuItem('Dashboard', 'Pages.Tenant.Dashboard', 'flaticon-line-graph', '/app/main/dashboard'),
             new AppMenuItem('Tenants', 'Pages.Tenants', 'flaticon-list-3', '/app/admin/tenants'),
             new AppMenuItem('Editions', 'Pages.Editions', 'flaticon-app', '/app/admin/editions'),

@@ -13,9 +13,9 @@ import { RouterModule } from '@angular/router';
                         data: { permission: 'Pages.Tenant.Dashboard' },
                     },
                     {
-                        path: 'document',
-                        loadChildren: () => import('./document/document.module').then((m) => m.documentModule),
-                    },
+                        path: 'quan-ly-van-ban',
+                        loadChildren: () => import('./quanlyvanban/quanlyvanban.module').then(m => m.QuanlyvanbanModule)
+                    },                    
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
                     { path: '**', redirectTo: 'dashboard' },
                 ],

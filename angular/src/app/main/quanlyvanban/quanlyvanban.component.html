@@ -1,0 +1,185 @@
+<div [@routerTransition]>
+    <!-- <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div class="kt-container ">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <span>{{"Quản lý văn bản" | localize}}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        {{"EditTenantHeaderInfo" | localize}}
+                    </span>
+                </div>
+                <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button class="btn btn-primary" (click)="createDocModal.show()"><i class="fa fa-plus"></i>
+                            {{"CreateNewDoc" | localize}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kt-container kt-grid__item kt-grid__item--fluid">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body  kt-portlet__body--fit">
+                    <h3>{{"All Doc" | localize}}</h3>
+                    <div *ngFor="let doc of doc">
+                        <div class="row kt-row--no-padding align-items-center">
+                            <div class="col">
+                                <h4>{{doc.fullText + ' ' + doc.type}}</h4>
+                                <span>{{doc.docID}}</span>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+                <createDocModal #createDocModal (modalSave)="getDoc()"></createDocModal>
+            </div>
+        </div>
+    </div>
+    <div class="search-container">
+        <input class="col-lg-3 col-md-3 col-sm-3" type="text" name="search1" [(ngModel)]="searchText1" autocomplete="off" placeholder="&#61442; Searching documents">
+        <input      class="col-lg-3 col-md-3 col-sm-3"
+                    id="SampleDatePicker"
+                    type="text"
+                    #SampleDatePicker
+                    name="SampleDataPicker"
+                    bsDatepicker
+                    datePickerLuxonModifier
+                    [bsConfig]="{adaptivePosition: true }"/>
+         <input      class="col-lg-3 col-md-3 col-sm-3"
+                    id="SampleDatePicker"
+                    type="text"
+                    #SampleDatePicker
+                    name="SampleDataPicker"
+                    bsDatepicker
+                    datePickerLuxonModifier
+                    [bsConfig]="{adaptivePosition: true }"/>
+    </div> -->
+
+
+    <div class="container">
+        <h3>{{"All Documents" | localize}} ({{getDocumentCount()}})</h3>
+        <div class="search-container input-group">
+            <input class="form-control col-lg-4 col-md-6 col-sm-12" type="text" name="filter" [(ngModel)]="filter" autocomplete="off" placeholder="Search documents...">
+            <button class="btn btn-primary ml-2" (click)="toggleAdvancedSearch()"><i class="fas fa-cogs"></i> Advanced Search </button>
+            <div class="input-group-append" *ngIf="!showAdvancedSearch">
+                <button class="btn btn-primary" (click)="getSearch()"><i class="fas fa-search"></i> Search</button>
+            </div>
+        </div>
+        <div class="advanced-search mt-3" *ngIf="showAdvancedSearch">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <input class="form-control" type="type=text" name="validDate" [(ngModel)]="validDate" bsDatepicker placeholder="Validate Date">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <input class="form-control" type="type=text" name="expireDate" [(ngModel)]="expireDate" bsDatepicker placeholder="Expire Date">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <!-- <button class="btn btn-primary" (click)="searchExtra()"><i class="fas fa-search"></i> Search by Date Range </button> -->
+                    <button class="btn btn-primary" (click)="getSearch()"><i class="fas fa-search"></i> Search</button>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row mt-3">
+            <div class="col">
+                <div *ngFor="let docItem of doc" class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ docItem.fullText }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ docItem.type }}</h6>
+                        <p class="card-text"><small class="text-muted">{{ docItem.docID }}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col">
+                <div class="form-control">
+                    <hr>
+                    <p-table
+                    [showCurrentPageReport]="true"
+                    [paginator]="true"
+                    [value]="data"
+                    [rowHover]="true"
+                    [rows]="2"
+                    [rowsPerPageOptions]="[2, 5, 10]"
+                    class="p-datatable-striped table table-striped">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="title">Title<p-sortIcon></p-sortIcon></th>
+                                <th pSortableColumn="docID">Code<p-sortIcon></p-sortIcon></th>
+                                <th pSortableColumn="type">Description<p-sortIcon></p-sortIcon></th>
+                                <th pSortableColumn="validated">Validated<p-sortIcon></p-sortIcon></th>
+                                <th pSortableColumn="expired">Expired<p-sortIcon></p-sortIcon></th>
+                            </tr>
+                        </ng-template>
+    
+                        <ng-template pTemplate="body" let-document>
+                            <tr>
+                                <td>{{ document.title }}</td>
+                                <td>{{ document.code }}</td>
+                                <td>{{ document.description }}</td>
+                                <td>{{ document.validation }}</td>
+                                <td>{{ document.expiration }}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+    
+                    <!-- <div class="container mt-3">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <div class="card flex justify-content-center">
+                                    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="doc.length" [rowsPerPageOptions]="[2, 5, 10]"></p-paginator>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- <div class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="card flex justify-content-center">
+                    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="doc.length" [rowsPerPageOptions]="[2, 5, 10]"></p-paginator>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    
+
+
+<!-- <div class="container">
+    <div class="row mt-3">
+        <div class="col">
+            <div class="form-control">
+                <hr>
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">DocID</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Validated</th>
+                            <th scope="col">Expired</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let document of doc">
+                            <td>{{ document.title }}</td>
+                            <td>{{ document.docID }}</td>
+                            <td>{{ document.type }}</td>
+                            <td>{{ document.validated }}</td>
+                            <td>{{ document.expired }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> -->

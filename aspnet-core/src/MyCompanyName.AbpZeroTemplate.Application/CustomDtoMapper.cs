@@ -25,6 +25,7 @@ using MyCompanyName.AbpZeroTemplate.Authorization.Users.Importing.Dto;
 using MyCompanyName.AbpZeroTemplate.Authorization.Users.Profile.Dto;
 using MyCompanyName.AbpZeroTemplate.Chat;
 using MyCompanyName.AbpZeroTemplate.Chat.Dto;
+using MyCompanyName.AbpZeroTemplate.MyDocument.DTO;
 using MyCompanyName.AbpZeroTemplate.DynamicEntityProperties.Dto;
 using MyCompanyName.AbpZeroTemplate.Editions;
 using MyCompanyName.AbpZeroTemplate.Editions.Dto;
@@ -37,10 +38,13 @@ using MyCompanyName.AbpZeroTemplate.MultiTenancy.Dto;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.HostDashboard.Dto;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments.Dto;
+using MyCompanyName.AbpZeroTemplate.MyDocument;
 using MyCompanyName.AbpZeroTemplate.Notifications.Dto;
 using MyCompanyName.AbpZeroTemplate.Organizations.Dto;
 using MyCompanyName.AbpZeroTemplate.Sessions.Dto;
 using MyCompanyName.AbpZeroTemplate.WebHooks.Dto;
+using Stripe;
+//using System.Reflection.Metadata;
 
 namespace MyCompanyName.AbpZeroTemplate
 {
@@ -164,6 +168,7 @@ namespace MyCompanyName.AbpZeroTemplate
             configuration.CreateMap<CreateUserDelegationDto, UserDelegation>();
 
             /* ADD YOUR OWN CUSTOM AUTOMAPPER MAPPINGS HERE */
+            configuration.CreateMap<Document, DocumentListDto>();
         }
     }
 }

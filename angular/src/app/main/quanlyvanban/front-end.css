@@ -1,0 +1,30 @@
+/* Tùy chỉnh nút tìm kiếm và tìm kiếm nâng cao */
+button.btn {
+    margin-left: 10px;
+}
+
+/* Tùy chỉnh ô nhập liệu */
+input[type="text"] {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: none;
+}
+
+/* Tùy chỉnh ô nhập liệu cho ngày tháng năm */
+input[type="date"] {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: none;
+}
+
+/* Tùy chỉnh khoảng cách giữa các phần tử */
+.search-container {
+    margin-bottom: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+}
