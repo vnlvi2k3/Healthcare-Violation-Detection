@@ -1,8 +1,17 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using MyCompanyName.AbpZeroTemplate.Authorization;
+using Abp.Linq.Extensions;
+using Abp.Extensions;
+using MyCompanyName.AbpZeroTemplate.MyDocument;
+//using MyCompanyName.AbpZeroTemplate.IDocument;
 using MyCompanyName.AbpZeroTemplate.MyDocument;
 using MyCompanyName.AbpZeroTemplate.MyDocument.DTO;
 using System;
@@ -26,14 +35,7 @@ namespace MyCompanyName.AbpZeroTemplate.DocumentService
             _documentRepository = documentRepository;
         }
 
-        [AbpAuthorize(AppPermissions.Pages_Tenant_Document_DeleteRestore)]
-
-        public async Task DeleteDocument(EntityDto input)
-        {
-            await _documentRepository.DeleteAsync(input.Id);
-
-        }
-
+        
         [AbpAuthorize(AppPermissions.Pages_Tenant_Document_DeleteRestore)]
         public async Task RestoreDocument(int input)
         {
@@ -169,6 +171,13 @@ namespace MyCompanyName.AbpZeroTemplate.DocumentService
             var document = query.ToList();
 
             return new ListResultDto<DocumentListDto>(ObjectMapper.Map<List<DocumentListDto>>(document));
+        }
+        [AbpAuthorize(AppPermissions.Pages_Tenant_Document_DeleteRestore)]
+
+        public async Task DeleteDocument(EntityDto input)
+        {
+            await _documentRepository.DeleteAsync(input.Id);
+
         }
     };
 }

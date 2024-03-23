@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System;
 using MyCompanyName.AbpZeroTemplate.Authorization.Users;
+using MyCompanyName.AbpZeroTemplate.MyDocument;
+//using MyCompanyName.AbpZeroTemplate.Documents;
 
 namespace MyCompanyName.AbpZeroTemplate.MyDocument
 {
@@ -46,4 +48,3 @@ namespace MyCompanyName.AbpZeroTemplate.MyDocument
         public virtual int DocumentId { get; set; }
     }
 }
-
