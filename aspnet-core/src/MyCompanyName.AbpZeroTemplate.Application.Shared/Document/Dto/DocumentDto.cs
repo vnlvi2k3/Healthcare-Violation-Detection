@@ -38,4 +38,44 @@ namespace MyCompanyName.AbpZeroTemplate.MyDocument.DTO
         //public User User { get; set; }
         public long DVKCBId { get; set; }
     }
+
+    public class CreateDocumentInput
+    {
+        [Required]
+        [MaxLength(20)]
+        public virtual string title { get; set; } // tiêu đề
+
+        [Required]
+        [MaxLength(20)]
+        public virtual string code { get; set; } // số hiệu văn bản (e.g: 2401/QĐ-BGDĐT, 4433/BYT-KCB)
+
+        [MaxLength(20)]
+        public virtual string docType { get; set; } // loại văn bản
+
+        public virtual DateTime publishDate { get; set; } // ngày ban hành
+
+        public virtual DateTime validation { get; set; } // ngày hiệu lực
+
+        public virtual DateTime expiration { get; set; } // ngày hết hiệu lực
+
+        [MaxLength(20)]
+        public virtual string publishPlace { get; set; } // nơi ban hành
+
+        [MaxLength(20)]
+        public virtual string recipient { get; set; } // người nhận
+
+        [MaxLength(20)]
+        public virtual string approver { get; set; } // người duyệt
+
+        [MaxLength(20)]
+        public virtual string signer { get; set; } // người ký
+
+        [MaxLength(20)]
+        public virtual string status { get; set; } // trạng thái
+
+        [MaxLength(200)]
+        public virtual string description { get; set; } // trích yếu
+
+        public virtual string fullText { get; set; } // toàn văn
+    }
 }

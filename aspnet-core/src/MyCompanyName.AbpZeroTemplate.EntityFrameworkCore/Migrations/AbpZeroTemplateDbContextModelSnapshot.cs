@@ -1816,7 +1816,7 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                     b.ToTable("AppFriendships");
                 });
 
-            modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.LegalText.VanBanPhapLy", b =>
+            modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.MultiTenancy.Accounting.Invoice", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1824,44 +1824,24 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("CreationTime")
+                    b.Property<DateTime>("InvoiceDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("InvoiceNo")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("DeleterUserId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("TenantAddress")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("TenantLegalName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmailAddress")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastModifierUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)");
+                    b.Property<string>("TenantTaxNo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("PbVanBanPhapLy");
+                    b.ToTable("AppInvoices");
                 });
 
             modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments.SubscriptionPayment", b =>
@@ -2097,19 +2077,30 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                     b.Property<bool>("approved")
                         .HasColumnType("bit");
 
+                    b.Property<string>("approver")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("code")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("docType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("expiration")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("fullText")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("medical_product")
@@ -2118,23 +2109,43 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                     b.Property<string>("province")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("publishDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("publishPlace")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<bool>("published")
                         .HasColumnType("bit");
+
+                    b.Property<string>("recipient")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<bool>("showed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("signer")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("title")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("validation")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DVKCBId");
 
                     b.ToTable("PbDocuments");
                 });
@@ -2538,17 +2549,6 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                     b.Navigation("Edition");
 
                     b.Navigation("LastModifierUser");
-                });
-
-            modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.MyDocument.Document", b =>
-                {
-                    b.HasOne("MyCompanyName.AbpZeroTemplate.Authorization.Users.User", "User")
-                        .WithMany()
-                        .HasForeignKey("DVKCBId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.MyDocument.OldDocument", b =>

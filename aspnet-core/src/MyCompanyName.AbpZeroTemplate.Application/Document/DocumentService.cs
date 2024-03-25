@@ -23,6 +23,7 @@ using System.Text;
 using Abp.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Abp.Collections.Extensions;
+using Stripe;
 
 namespace MyCompanyName.AbpZeroTemplate.DocumentService
 {
@@ -179,5 +180,12 @@ namespace MyCompanyName.AbpZeroTemplate.DocumentService
             await _documentRepository.DeleteAsync(input.Id);
 
         }
+
+        public async Task CreateDocument(CreateDocumentInput input)
+        {
+            var document = ObjectMapper.Map<Document>(input);
+            await _documentRepository.InsertAsync(document);
+        }
+
     };
 }

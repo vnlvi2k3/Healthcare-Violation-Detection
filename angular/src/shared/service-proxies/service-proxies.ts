@@ -3021,6 +3021,58 @@ export class DocumentServiceProxy {
         }
         return _observableOf<void>(<any>null);
     }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    createDocument(body: CreateDocumentInput | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Document/CreateDocument";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateDocument(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateDocument(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreateDocument(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
 }
 
 @Injectable()
@@ -15937,6 +15989,90 @@ export interface IComboboxItemDto {
     value: string | undefined;
     displayText: string | undefined;
     isSelected: boolean;
+}
+
+export class CreateDocumentInput implements ICreateDocumentInput {
+    title!: string;
+    code!: string;
+    docType!: string | undefined;
+    publishDate!: DateTime;
+    validation!: DateTime;
+    expiration!: DateTime;
+    publishPlace!: string | undefined;
+    recipient!: string | undefined;
+    approver!: string | undefined;
+    signer!: string | undefined;
+    status!: string | undefined;
+    description!: string | undefined;
+    fullText!: string | undefined;
+
+    constructor(data?: ICreateDocumentInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.title = _data["title"];
+            this.code = _data["code"];
+            this.docType = _data["docType"];
+            this.publishDate = _data["publishDate"] ? DateTime.fromISO(_data["publishDate"].toString()) : <any>undefined;
+            this.validation = _data["validation"] ? DateTime.fromISO(_data["validation"].toString()) : <any>undefined;
+            this.expiration = _data["expiration"] ? DateTime.fromISO(_data["expiration"].toString()) : <any>undefined;
+            this.publishPlace = _data["publishPlace"];
+            this.recipient = _data["recipient"];
+            this.approver = _data["approver"];
+            this.signer = _data["signer"];
+            this.status = _data["status"];
+            this.description = _data["description"];
+            this.fullText = _data["fullText"];
+        }
+    }
+
+    static fromJS(data: any): CreateDocumentInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateDocumentInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["title"] = this.title;
+        data["code"] = this.code;
+        data["docType"] = this.docType;
+        data["publishDate"] = this.publishDate ? this.publishDate.toString() : <any>undefined;
+        data["validation"] = this.validation ? this.validation.toString() : <any>undefined;
+        data["expiration"] = this.expiration ? this.expiration.toString() : <any>undefined;
+        data["publishPlace"] = this.publishPlace;
+        data["recipient"] = this.recipient;
+        data["approver"] = this.approver;
+        data["signer"] = this.signer;
+        data["status"] = this.status;
+        data["description"] = this.description;
+        data["fullText"] = this.fullText;
+        return data; 
+    }
+}
+
+export interface ICreateDocumentInput {
+    title: string;
+    code: string;
+    docType: string | undefined;
+    publishDate: DateTime;
+    validation: DateTime;
+    expiration: DateTime;
+    publishPlace: string | undefined;
+    recipient: string | undefined;
+    approver: string | undefined;
+    signer: string | undefined;
+    status: string | undefined;
+    description: string | undefined;
+    fullText: string | undefined;
 }
 
 export class CreateEditionDto implements ICreateEditionDto {
