@@ -1,0 +1,162 @@
+<div bsModal #modal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <form *ngIf="active" #personForm="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span>{{"Tạo văn bản mới" | localize}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row mb-6">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="nameInput">Tiêu đề</label>
+                                    <input class="form-control" type="text" name="title" [(ngModel)]="document.title" required maxlength="255">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-6">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="surnameInput">Số hiệu văn bản</label>
+                                    <input class="form-control" type="text" name="code" [(ngModel)]="document.code" required maxlength="20">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Loại văn bản</label>
+                                    <select class="form-control" id="publishPlace" name="publishPlace" [(ngModel)]="document.docType" required>
+                                        <option value="" disabled selected>Chọn loại văn bản</option>
+                                        <option value="Loại 1">Loại 1</option>
+                                        <option value="Loại 2">Loại 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Ngày ban hành</label>
+                                    <input type="text"
+                                           name="publishDate"
+                                           placeholder="Chọn ngày"
+                                           class="form-control"
+                                           bsDatepicker
+                                           [(ngModel)]="document.publishDate">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Ngày hiệu lực</label>
+                                    <input type="text"
+                                           name="validation"
+                                           placeholder="Chọn ngày"
+                                           class="form-control"
+                                           bsDatepicker
+                                           [(ngModel)]="document.validation">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="datepicker3">Ngày hết hiệu lực</label>
+                                    <input type="text"
+                                           name="expiration"
+                                           placeholder="Chọn ngày"
+                                           class="form-control"
+                                           bsDatepicker
+                                           [(ngModel)]="document.expiration">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-6">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Nơi ban hành</label>
+                                    <select class="form-control" id="publishPlace" name="publishPlace" [(ngModel)]="document.publishPlace" required>
+                                        <option value="" disabled selected>Chọn nơi ban hành</option>
+                                        <option value="Nơi 1">Nơi 1</option>
+                                        <option value="Nơi 2">Nơi 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Người nhận</label>
+                                    <input class="form-control" type="text" name="recipient" required maxlength="255" [(ngModel)]="document.recipient">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Người duyệt</label>
+                                    <input class="form-control" type="text" name="approver" required maxlength="255" [(ngModel)]="document.approver">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Người ký</label>
+                                    <input class="form-control" type="text" name="signer" required maxlength="255" [(ngModel)]="document.signer">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Trạng thái</label>
+                                    <select class="form-control" id="publishPlace" name="publishPlace" [(ngModel)]="document.status" required>
+                                        <option value="" disabled selected>Chọn tình trạng văn bản</option>
+                                        <option value="Status 1">Đã được phê duyệt</option>
+                                        <option value="Status 2">Chưa được phê duyệt</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-6">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Trích yếu</label>
+                                    <input class="form-control" type="text" name="description" required maxlength="1000" [(ngModel)]="document.description">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-6">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Toàn văn</label>
+                                    <!-- <input class="form-control" type="text" name="fullText" required maxlength="255" [(ngModel)]="document.fullText"> -->
+                                    <p-fileUpload
+                                        mode="advanced"
+                                        [showUploadButton]="false"
+                                        [showCancelButton]="true"
+                                        multiple="false"
+                                        cancelButton="true"
+                                        (onSelect)="uploadFile($event)"
+                                        chooseLabel="Chọn file toàn văn"
+                                        uploadLabel="Đồng ý tải lên"
+                                        cancelLabel="Xóa file"
+                                        customUpload="true"
+                                        id="DefaultFileUploadFileInput"
+                                        name="DefaultFileUploadFileInput"
+                                        [(url)] = "uploadUrl"
+                                        accept=".pdf,.doc,.docx,application/msword"
+                                        maxFileSize="10000000"
+                                        (onBeforeSend)="onBeforeSend($event)">
+                                        <ng-template pTemplate="content">
+                                            <ul *ngIf="uploadFiles.length">
+                                                <li *ngFor="let file of uploadFiles">{{file.name}}-{{file.size}} bytes</li>
+                                            </ul>
+                                        </ng-template>
+                                    </p-fileUpload>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{"Cancel" | localize}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!personForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot' | localize)"><i class="fa fa-save"></i> <span>{{"Save" | localize}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

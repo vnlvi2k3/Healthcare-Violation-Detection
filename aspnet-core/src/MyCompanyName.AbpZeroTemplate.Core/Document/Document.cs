@@ -9,25 +9,56 @@ namespace MyCompanyName.AbpZeroTemplate.MyDocument
     [Table("PbDocuments")]
     public class Document : FullAuditedEntity
     {
+        [Required]
+        [MaxLength(255)]
+        public virtual string title { get; set; } // tiêu đề
+
 
         [Required]
         [MaxLength(20)]
-        public virtual string code { get; set; }
+        public virtual string code { get; set; } // số hiệu văn bản (e.g: 2401/QĐ-BGDĐT, 4433/BYT-KCB)
 
         [Required]
-        [MaxLength(20)]
-        public virtual string title { get; set; }
+        public virtual string docType { get; set; } // loại văn bản
 
-        [MaxLength(200)]
-        public virtual string description { get; set; }
+        [Required]
+        public virtual DateTime publishDate { get; set; } // ngày ban hành
 
-        public virtual DateTime validation { get; set; }
+        [Required]
+        public virtual DateTime validation { get; set; } // ngày hiệu lực
 
-        public virtual DateTime expiration { get; set; }
+        [Required]
+        public virtual DateTime expiration { get; set; } // ngày hết hiệu lực
+
+        [Required]
+        [MaxLength(255)]
+        public virtual string publishPlace { get; set; } // nơi ban hành
+
+        [Required]
+        [MaxLength(255)]
+        public virtual string recipient { get; set; } // người nhận
+
+        [Required]
+        [MaxLength(50)]
+        public virtual string approver { get; set; } // người duyệt
+
+        [Required]
+        [MaxLength(50)]
+        public virtual string signer { get; set; } // người ký
+
+        [Required]
+        public virtual string status { get; set; } // trạng thái
+
+        [Required]
+        [MaxLength(1000)]
+        public virtual string description { get; set; } // trích yếu
+
+        [Required]
+        public virtual string fullText { get; set; } // toàn văn (tên file.pdf)
+
 
         public virtual bool published { get; set; }
 
-        public virtual string fullText { get; set; }
 
         public virtual bool approved { get; set; }
 

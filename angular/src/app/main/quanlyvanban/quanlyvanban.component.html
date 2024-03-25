@@ -60,10 +60,14 @@
     <div class="container">
         <h3>{{"All Documents" | localize}} ({{getDocumentCount()}})</h3>
         <div class="search-container input-group">
-            <input class="form-control col-lg-4 col-md-6 col-sm-12" type="text" name="filter" [(ngModel)]="filter" autocomplete="off" placeholder="Search documents...">
-            <button class="btn btn-primary ml-2" (click)="toggleAdvancedSearch()"><i class="fas fa-cogs"></i> Advanced Search </button>
+            <input class="form-control col-lg-4 col-md-6 col-sm-12 rounded-2" type="text" name="filter" [(ngModel)]="filter" autocomplete="off" placeholder="Search documents...">
+            <button class="btn btn-primary rounded-2 ms-2" (click)="toggleAdvancedSearch()"><i class="fas fa-cogs"></i> Advanced Search </button>
             <div class="input-group-append" *ngIf="!showAdvancedSearch">
-                <button class="btn btn-primary" (click)="getSearch()"><i class="fas fa-search"></i> Search</button>
+                <button class="btn btn-primary ms-2" (click)="getSearch()"><i class="fas fa-search"></i> Search</button>
+            </div>
+            <div class="input-group-append" *ngIf="!showAdvancedSearch">
+                <button class="btn btn-success ms-2" (click)="createDocumentModal.show()"><i class="fa fa-plus"></i>
+                    {{"New" | localize}}</button>
             </div>
         </div>
         <div class="advanced-search mt-3" *ngIf="showAdvancedSearch">
@@ -75,10 +79,13 @@
                     <input class="form-control" type="type=text" name="expireDate" [(ngModel)]="expireDate" bsDatepicker placeholder="Expire Date">
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <!-- <button class="btn btn-primary" (click)="searchExtra()"><i class="fas fa-search"></i> Search by Date Range </button> -->
                     <button class="btn btn-primary" (click)="getSearch()"><i class="fas fa-search"></i> Search</button>
                 </div>
             </div>
+        </div>
+
+        <div class="kt-container kt-grid__item kt-grid__item--fluid">
+            <createDocumentModal #createDocumentModal (modalSave)="getDoc()"></createDocumentModal>
         </div>
         <!-- <div class="row mt-3">
             <div class="col">

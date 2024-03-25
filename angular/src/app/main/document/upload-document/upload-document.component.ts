@@ -51,6 +51,7 @@ export class UploadFileModalComponent extends AppComponentBase {
     }
 
     uploadFile(data: {files: File}): void {
+        window.alert("123123");
         const formData: FormData = new FormData();
         const file = data.files[0];
         console.log(file)
