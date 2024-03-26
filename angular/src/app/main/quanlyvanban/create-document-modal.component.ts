@@ -74,4 +74,9 @@ export class CreateDocumentModalComponent extends AppComponentBase {
         event.xhr.setRequestHeader('Authorization','Bearer ' + abp.auth.getToken())
     }
     
+    isValidCode(): boolean {
+    const code = this.document.code;
+    const pattern = /\d+\/[A-ZĐĐ]+-[A-ZĐĐ]+$/;
+    return pattern.test(code);
+    }
 }
