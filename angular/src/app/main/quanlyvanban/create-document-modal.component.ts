@@ -5,6 +5,9 @@ import { AppComponentBase } from '@shared/common/app-component-base';
 import { finalize } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { AppConsts } from '@shared/AppConsts';
+import { result } from 'lodash-es';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms'; // Import NgForm
 
 @Component({
     selector: 'createDocumentModal',
@@ -24,6 +27,9 @@ export class CreateDocumentModalComponent extends AppComponentBase {
 
     uploadUrl: string;
     uploadFiles: any[] = [];
+
+    isDuplicated: boolean = false;
+    fileUploaded: boolean = false;
 
     constructor(
         injector: Injector,
@@ -69,14 +75,27 @@ export class CreateDocumentModalComponent extends AppComponentBase {
             // set fullText to response.result
             this.document.fullText = response.result;
         })
+        this.fileUploaded = true;
+    }
+    removeFile(): void {
+        this.fileUploaded = false;
     }
     onBeforeSend(event): void {
         event.xhr.setRequestHeader('Authorization','Bearer ' + abp.auth.getToken())
     }
     
     isValidCode(): boolean {
-    const code = this.document.code;
-    const pattern = /\d+\/[A-ZĐĐ]+-[A-ZĐĐ]+$/;
-    return pattern.test(code);
+        const code = this.document.code;
+        const pattern = /\d+\/[A-ZĐĐ]+-[A-ZĐĐ]+$/;
+        return pattern.test(code);
     }
+
+    checkDup(): void {
+        this._documentService.getDocument(this.document.code).subscribe((result) => {
+          // Inside the subscription callback, set the isDuplicated flag
+        this.isDuplicated = result.items.length > 0;
+        //   window.alert(result.items.length); // You can remove this alert if not needed
+        });
+      }
+      
 }

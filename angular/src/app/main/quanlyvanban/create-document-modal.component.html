@@ -29,10 +29,14 @@
                                            type="text" 
                                            name="code" 
                                            [(ngModel)]="document.code" 
-                                           required maxlength="20">
+                                           required maxlength="20"
+                                           (input)="checkDup()">
                                            
-                                    <div *ngIf="!isValidCode()" class="error-message">
-                                        Vui lòng nhập đúng quy cách (VD: 2401/QĐ-BGDĐT)
+                                    <div *ngIf="!isValidCode()" class="alert alert-warning mt-2">
+                                        Lưu ý: Vui lòng nhập đúng quy cách (VD: 2401/QĐ-BGDĐT)
+                                    </div>
+                                    <div *ngIf="isDuplicated && isValidCode()" class="alert alert-warning mt-2">
+                                        Lưu ý: Mã văn bản này đã được tạo sẵn.
                                     </div>
                                 </div>
                             </div>
@@ -140,6 +144,7 @@
                                         multiple="false"
                                         cancelButton="true"
                                         (onSelect)="uploadFile($event)"
+                                        (onRemove)="removeFile()"
                                         chooseLabel="Chọn file toàn văn"
                                         uploadLabel="Đồng ý tải lên"
                                         cancelLabel="Xóa file"
@@ -163,7 +168,9 @@
                 </div>
                 <div class="modal-footer">
                     <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{"Cancel" | localize}}</button>
-                    <button type="submit" class="btn btn-primary" [disabled]="!personForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot' | localize)"><i class="fa fa-save"></i> <span>{{"Save" | localize}}</span></button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!isValidCode() || !personForm.form.valid || isDuplicated || !fileUploaded" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot' | localize)">
+                        <i class="fa fa-save"></i> <span>{{"Save" | localize}}</span>
+                    </button>
                 </div>
             </form>
         </div>
