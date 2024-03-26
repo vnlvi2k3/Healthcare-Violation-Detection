@@ -73,4 +73,5 @@ export class CreateDocumentModalComponent extends AppComponentBase {
     onBeforeSend(event): void {
         event.xhr.setRequestHeader('Authorization','Bearer ' + abp.auth.getToken())
     }
+    
 }

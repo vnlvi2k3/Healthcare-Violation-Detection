@@ -23,8 +23,19 @@
                         <div class="row mb-6">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="surnameInput">Số hiệu văn bản</label>
+                                    <!-- <label for="surnameInput">Số hiệu văn bản</label>
                                     <input class="form-control" type="text" name="code" [(ngModel)]="document.code" required maxlength="20">
+                                     -->
+                                    <label for="inputFormat">Số hiệu văn bản</label>
+                                    <input type="text" id="inputFormat" name="inputFormat" [(ngModel)]="inputFormat" 
+                                        required 
+                                        pattern="\d{2}\/[A-Z]{2}-[A-Z]{6}"
+                                        title="Số hiệu văn bản có dạng XX/XX-XXXXXX"
+                                        #inputFormatField="ngModel">
+                                    <div *ngIf="inputFormatField.invalid && (inputFormatField.dirty || inputFormatField.touched)" class="error">
+                                    <div *ngIf="inputFormatField.errors?.required">Yêu cầu số hiệu văn bản</div>
+                                    <div *ngIf="inputFormatField.errors?.pattern">Số hiệu văn bản phải có dạng XX/XX-XXXXXX</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col">
