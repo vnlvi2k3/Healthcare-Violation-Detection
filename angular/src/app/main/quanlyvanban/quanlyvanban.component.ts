@@ -153,7 +153,6 @@ export class QuanlyvanbanComponent extends AppComponentBase implements OnInit {
             if(isConfirmed){
                 this._documentService.deleteDocument(doc.id).subscribe(() => {
                     this.notify.info(this.l('SuccessfullyDeleted'));
-                    _remove(this.data, doc);
                 });
             }
         }
