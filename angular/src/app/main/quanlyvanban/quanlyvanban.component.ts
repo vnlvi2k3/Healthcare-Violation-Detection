@@ -95,6 +95,7 @@ export class QuanlyvanbanComponent extends AppComponentBase implements OnInit {
   getDoc(): void {
     this._documentService.getDocument(this.filter).subscribe((result) => {
         this.data = result.items;
+        console.log(this.data);
         // this.updateDisplayedDocuments();
     });
   }
