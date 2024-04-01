@@ -173,8 +173,6 @@ namespace MyCompanyName.AbpZeroTemplate.DocumentService
 
             return new ListResultDto<DocumentListDto>(ObjectMapper.Map<List<DocumentListDto>>(document));
         }
-        [AbpAuthorize(AppPermissions.Pages_Tenant_Document_DeleteRestore)]
-
         public async Task DeleteDocument(EntityDto input)
         {
             await _documentRepository.DeleteAsync(input.Id);

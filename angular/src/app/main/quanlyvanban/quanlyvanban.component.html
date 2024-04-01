@@ -126,22 +126,22 @@
                         <ng-template pTemplate="body" let-document>
                             <tr>
                                 <td>{{ document.title }}</td>
-                                <td>{{ document.approver }}</td>
+                                <td>{{ document.code }}</td>
                                 <td>{{ document.description }}</td>
-                                <td>{{ document.validation }}</td>
-                                <td>{{ document.expiration }}</td>
+                                <td>{{ convertDate(document.validation) }}</td>
+                                <td>{{ convertDate(document.expiration) }}</td>
                                 <td class="action">
                                     <button class="btn btn-primary btn-outline-hover-danger btn-icon" title="{{'Preview' | localize}}" >
-                                        <i class="fa fa-eye"></i>
+                                        <i class="fa fa-eye" (click)="previewFile(document.fullText)"></i>
                                     </button>
                                     <button class="btn btn-primary btn-outline-hover-danger btn-icon" title="{{'Download' | localize}}">
-                                        <i class="fa fa-download"></i>
+                                        <i class="fa fa-download" (click)="downloadFile(document.fullText)"></i>
                                     </button>
                                     <button class="btn btn-warning btn-outline-hover-danger btn-icon" title="{{'Edit' | localize}}">
                                         <i class="fa fa-edit"></i>
                                     </button>
                                     <button class="btn btn-danger btn-outline-hover-danger btn-icon" title="{{'Delete' | localize}}">
-                                        <i class="fa fa-times"></i>
+                                        <i class="fa fa-times" (click)="deleteDocument(document)"></i>
                                     </button>
                                 </td>
                             </tr>

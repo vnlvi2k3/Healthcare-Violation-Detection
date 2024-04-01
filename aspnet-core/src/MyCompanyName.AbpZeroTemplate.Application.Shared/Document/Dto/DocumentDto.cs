@@ -18,6 +18,8 @@ namespace MyCompanyName.AbpZeroTemplate.MyDocument.DTO
     {
         public string Title { get; set; }
 
+        public string code { get; set; }
+
         public string description { get; set; }
 
         public DateTime validation { get; set; }

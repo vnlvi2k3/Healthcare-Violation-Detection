@@ -10,6 +10,10 @@ import { Paginator } from 'primeng/paginator';
 import { PrimengTableHelper } from 'shared/helpers/PrimengTableHelper';
 import { DateTimeService } from '@app/shared/common/timing/date-time.service';
 import { TableModule } from 'primeng/table';
+import { HttpClient } from '@angular/common/http';
+import { AppConsts } from '@shared/AppConsts';
+import * as moment from 'moment';
+import { remove as _remove } from 'lodash-es';
 
 @Component({
     templateUrl: './quanlyvanban.component.html',
@@ -23,12 +27,22 @@ export class QuanlyvanbanComponent extends AppComponentBase implements OnInit {
   validDate: string = '';
   expireDate: string = '';
   showAdvancedSearch: boolean = false; // Variable to control the visibility of advanced search inputs
+  previewUrl: string;
+  downloadUrl: string;
 
   constructor(
       injector: Injector,
-      private _documentService: DocumentServiceProxy
+      private _documentService: DocumentServiceProxy,
+      private _httpClient: HttpClient
   ) {
       super(injector);
+      this.previewUrl= AppConsts.remoteServiceBaseUrl + '/FileUpload/DownloadFile';
+      this.downloadUrl = AppConsts.remoteServiceBaseUrl + '/FileUpload/DownloadFile';
+  }
+
+  convertDate(isoDate: DateTime): string {
+    const date = moment(isoDate);
+    return date.format('DD/MM/YYYY');
   }
 
   ngOnInit(): void {
@@ -95,7 +109,7 @@ export class QuanlyvanbanComponent extends AppComponentBase implements OnInit {
   getDoc(): void {
     this._documentService.getDocument(this.filter).subscribe((result) => {
         this.data = result.items;
-        console.log(this.data);
+        // console.log(this.convertDate(this.data[0].validation));
         // this.updateDisplayedDocuments();
     });
   }
@@ -110,5 +124,39 @@ export class QuanlyvanbanComponent extends AppComponentBase implements OnInit {
   // updateDisplayedDocuments() {
   //     this.displayedDocs = this.doc.slice(this.first, this.first + this.rows);
   // }
+  downloadFile(fileName: string){
+    this._httpClient
+        .get<any>(this.downloadUrl + `?fileName=${fileName}`, {responseType: 'blob' as 'json'})
+        .subscribe((response: Blob) => {
+            const downloadURL = window.URL.createObjectURL(response);
+            const link = document.createElement('a');
+            link.href = downloadURL;
+            link.download = fileName;
+            link.click();
+            URL.revokeObjectURL(downloadURL);
+        })
+  }
+  previewFile(fileName: string){
+      this._httpClient
+          .get<any>(this.previewUrl + `?fileName=${fileName}`, {responseType: 'blob' as 'json'})
+          .subscribe((response: Blob) => {
+              const previewUrl = window.URL.createObjectURL(response);
+              window.open(previewUrl, '_blank');
+              URL.revokeObjectURL(previewUrl);
+          })
+  }
 
+  deleteDocument(doc: DocumentListDto): void {
+    this.message.confirm(
+        this.l('Are You Sure To Delete The Document', doc.id),'',
+        (isConfirmed) => {
+            if(isConfirmed){
+                this._documentService.deleteDocument(doc.id).subscribe(() => {
+                    this.notify.info(this.l('SuccessfullyDeleted'));
+                    _remove(this.data, doc);
+                });
+            }
+        }
+    )
+  }
 }
