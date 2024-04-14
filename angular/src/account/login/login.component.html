@@ -1,7 +1,7 @@
 <!--begin::Signin-->
 <div class="login-form" [@routerTransition]>
     <div class="pb-13 pt-lg-0 pt-5">
-        <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">{{ 'LogIn' | localize }}</h3>
+        <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">{{ 'Đăng nhập' | localize }}</h3>
     </div>
     <!--begin::Form-->
     <form #loginForm="ngForm" class="login-form form" method="post"  (ngSubmit)="login()">
@@ -42,18 +42,18 @@
             <label class="form-check form-check-custom form-check-solid">
                 <input type="checkbox" name="rememberMe" class="form-check-input" value="true" [(ngModel)]="loginService.rememberMe">
                 <span class="form-check-label">
-                    {{ 'RememberMe' | localize }}
+                    {{ 'Remember me' | localize }}
                 </span>
             </label>
             <a routerLink="/account/forgot-password"
-               id="forget-password" class="text-primary font-size-h6 font-weight-bolder text-hover-primary">{{ 'ForgotPassword' | localize }}</a>
+               id="forget-password" class="text-primary font-size-h6 font-weight-bolder text-hover-primary">{{ 'Quên mật khẩu' | localize }}</a>
         </div>
 
         <!--begin::Action-->
         <div class="pb-lg-0 pb-5">
             <button type="submit"
                     [disabled]="!loginForm.form.valid"
-                    class="btn w-100 btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 me-3">{{ 'LogIn' | localize }}</button>
+                    class="btn w-100 btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 me-3">{{ 'Đăng nhập' | localize }}</button>
         </div>
 
 
@@ -91,7 +91,7 @@
 
 <div class="mt-5">
     <div>
-        <span>{{ 'NotAMemberYet' | localize }}</span>
+        <span>{{ 'Chưa có tài khoản sao?' | localize }}</span>
     </div>
     <span *ngIf="isSelfRegistrationAllowed">
         <a routerLink="/account/register">{{ 'CreateAnAccount' | localize }}</a>
@@ -99,9 +99,9 @@
    </span>
 
     <span *ngIf="!multiTenancySideIsTeanant && isTenantSelfRegistrationAllowed">
-        <a routerLink="/account/select-edition">{{ 'NewTenant' | localize }}</a>
+        <a routerLink="/account/select-edition">{{ 'Tạo account' | localize }}</a>
         <span class="pipe-divider"> | </span>
     </span>
 
-    <a routerLink="/account/email-activation" id="email-activation-btn">{{ 'EmailActivation' | localize }}</a>
+    <a routerLink="/account/email-activation" id="email-activation-btn">{{ 'Kích hoạt email' | localize }}</a>
 </div>
