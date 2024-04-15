@@ -14,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppConsts } from '@shared/AppConsts';
 import * as moment from 'moment';
 import { remove as _remove } from 'lodash-es';
+import { DatePipe } from '@angular/common';
 
 @Component({
     templateUrl: './quanlyvanban.component.html',
@@ -40,9 +41,10 @@ export class QuanlyvanbanComponent extends AppComponentBase implements OnInit {
       this.downloadUrl = AppConsts.remoteServiceBaseUrl + '/FileUpload/DownloadFile';
   }
 
-  convertDate(isoDate: Date): string {
-    const formattedDate = moment(isoDate).format('DD/MM/YYYY');
-    return formattedDate;
+  convertDate(isoDate: DateTime): string {
+    const date = new Date(isoDate.toISO()); // Convert isoDate to a Date object
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, 'dd/MM/yyyy');
   }
 
   ngOnInit(): void {

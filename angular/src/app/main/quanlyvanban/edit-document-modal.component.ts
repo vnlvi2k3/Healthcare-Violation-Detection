@@ -4,6 +4,8 @@ import { DocumentServiceProxy , CreateDocumentInput} from '@shared/service-proxi
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { HttpClient } from '@angular/common/http';
 import { AppConsts } from '@shared/AppConsts';
+import { DateTime } from 'luxon';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'editDocumentModal',
@@ -37,10 +39,18 @@ export class EditDocumentModalComponent extends AppComponentBase {
         this.uploadUrl = AppConsts.remoteServiceBaseUrl + '/FileUpload/UploadFile'
     }
 
+    convertDate(isoDate: DateTime): string {
+        const date = new Date(isoDate.toISO()); // Convert isoDate to a Date object
+        const datePipe = new DatePipe('en-US');
+        return datePipe.transform(date, 'dd/MM/yyyy');
+        // return date;
+    }
+
     show(documentId): void{
         this.active = true;
         this._documentService.getDocumentForEdit(documentId).subscribe((result) => {
             this.document = result;
+            console.log(this.document.expiration);
             this.modal.show();
         });
     }

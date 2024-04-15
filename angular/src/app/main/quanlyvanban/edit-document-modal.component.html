@@ -58,7 +58,8 @@
                                            placeholder="Chọn ngày"
                                            class="form-control"
                                            bsDatepicker
-                                           [(ngModel)]="document.publishDate">
+                                           [(ngModel)]="document.publishDate"
+                                           [ngModel]="convertDate(document.publishDate)">
                                 </div>
                             </div>
                             <div class="col">
@@ -69,18 +70,20 @@
                                            placeholder="Chọn ngày"
                                            class="form-control"
                                            bsDatepicker
-                                           [(ngModel)]="document.validation">
+                                           [(ngModel)]="document.validation"
+                                           [ngModel]="convertDate(document.validation)">
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="form-group">
+                                <div class="form-group" >
                                     <label for="datepicker3">Ngày hết hiệu lực</label>
                                     <input type="text"
                                            name="expiration"
                                            placeholder="Chọn ngày"
                                            class="form-control"
                                            bsDatepicker
-                                           [(ngModel)]="document.expiration">
+                                           [(ngModel)]="document.expiration"
+                                           [ngModel]="convertDate(document.expiration)">
                                 </div>
                             </div>
                         </div>
@@ -136,7 +139,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label>Toàn văn</label>
-                                    <!-- <input class="form-control" type="text" name="fullText" required maxlength="255" [(ngModel)]="document.fullText"> -->
+                                    <!-- <input class="form-control" type="text" name="fullText" maxlength="255" [(ngModel)]="document.fullText"> -->
                                     <p-fileUpload
                                         mode="advanced"
                                         [showUploadButton]="false"
@@ -152,13 +155,15 @@
                                         id="DefaultFileUploadFileInput"
                                         name="DefaultFileUploadFileInput"
                                         [(url)] = "uploadUrl"
+                                        [(ngModel)]="document.fullText"
                                         accept=".pdf,.doc,.docx"
                                         maxFileSize="10000000"
                                         (onBeforeSend)="onBeforeSend($event)">
                                         <ng-template pTemplate="content">
-                                            <ul *ngIf="uploadFiles.length">
+                                            <ul *ngIf="uploadFiles.length; else dispFullText">
                                                 <li *ngFor="let file of uploadFiles">{{file.name}}-{{file.size}} bytes</li>
                                             </ul>
+                                            <ng-template #dispFullText>{{document.fullText}}</ng-template>
                                         </ng-template>
                                     </p-fileUpload>
                                 </div>
@@ -168,7 +173,7 @@
                 </div>
                 <div class="modal-footer">
                     <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{"Cancel" | localize}}</button>
-                    <button type="submit" class="btn btn-primary" [disabled]="!isValidCode() || !personForm.form.valid || isDuplicated || !fileUploaded" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot' | localize)">
+                    <button type="submit" class="btn btn-primary" [disabled]="!isValidCode() || !personForm.form.valid || isDuplicated" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot' | localize)">
                         <i class="fa fa-save"></i> <span>{{"Save" | localize}}</span>
                     </button>
                 </div>
