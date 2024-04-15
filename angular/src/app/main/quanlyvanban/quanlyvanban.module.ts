@@ -5,10 +5,11 @@ import {QuanlyvanbanComponent} from './quanlyvanban.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { TableModule } from 'primeng/table'; 
 import { CreateDocumentModalComponent } from './create-document-modal.component';
+import { EditDocumentModalComponent } from './edit-document-modal.component';
 import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
-    declarations: [QuanlyvanbanComponent, CreateDocumentModalComponent],
+    declarations: [QuanlyvanbanComponent, CreateDocumentModalComponent, EditDocumentModalComponent],
     // imports: [AppSharedModule, QuanlyvanbanRoutingModule, TableModule]
     imports: [
         PaginatorModule,

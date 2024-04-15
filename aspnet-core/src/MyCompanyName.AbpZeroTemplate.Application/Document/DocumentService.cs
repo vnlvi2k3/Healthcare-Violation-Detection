@@ -184,6 +184,29 @@ namespace MyCompanyName.AbpZeroTemplate.DocumentService
             var document = ObjectMapper.Map<Document>(input);
             await _documentRepository.InsertAsync(document);
         }
+		public async Task<GetDocumentForEditOutput> GetDocumentForEdit(int inputId)
+		{
+			var document = await _documentRepository.GetAsync(inputId);
+			return ObjectMapper.Map<GetDocumentForEditOutput>(document);
+		}
 
+		public async Task EditDocument(CreateDocumentInput input)
+        {
+			var document = await _documentRepository.GetAsync(input.Id);
+			document.title = input.title;
+            document.code = input.code;
+            document.docType = input.docType;
+            document.publishDate = input.publishDate;
+            document.validation = input.validation;
+            document.expiration = input.expiration;
+            document.publishPlace = input.publishPlace;
+            document.recipient = input.recipient;
+            document.approver = input.approver;
+            document.signer = input.signer;
+            document.status = input.status;
+			document.description = input.description;
+            document.fullText = input.fullText;
+            await _documentRepository.UpdateAsync(document);
+        }
     };
 }

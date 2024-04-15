@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using MyCompanyName.AbpZeroTemplate.Authorization.Users;
 using Abp.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations.Schema;
+using Abp.Domain.Entities;
 
 namespace MyCompanyName.AbpZeroTemplate.MyDocument.DTO
 {
@@ -41,7 +42,38 @@ namespace MyCompanyName.AbpZeroTemplate.MyDocument.DTO
         public long DVKCBId { get; set; }
     }
 
-    public class CreateDocumentInput
+    public class GetDocumentForEditOutput : EntityDto
+    {
+		public string title { get; set; }
+
+		public string code { get; set; }
+
+		public string docType { get; set; }
+
+		public DateTime publishDate { get; set; } // ngày ban hành
+
+		public DateTime validation { get; set; } // ngày hiệu lực
+
+		public DateTime expiration { get; set; } // ngày hết hiệu lực
+
+		public string publishPlace { get; set; } // nơi ban hành
+
+		public string recipient { get; set; } // người nhận
+
+		public string approver { get; set; } // người duyệt
+
+		public  string signer { get; set; } // người ký
+
+		public string status { get; set; } // trạng thái
+
+		public string description { get; set; } // trích yếu
+
+		public string fullText { get; set; } // toàn văn
+	}
+
+
+
+	public class CreateDocumentInput : EntityDto
     {
         [Required]
         [MaxLength(20)]
@@ -80,4 +112,5 @@ namespace MyCompanyName.AbpZeroTemplate.MyDocument.DTO
 
         public virtual string fullText { get; set; } // toàn văn
     }
+
 }

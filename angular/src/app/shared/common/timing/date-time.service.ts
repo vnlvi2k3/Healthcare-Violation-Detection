@@ -4,6 +4,9 @@ import { DateTime } from 'luxon';
 
 @Injectable()
 export class DateTimeService {
+    static formatDate(isoDate: DateTime): string {
+      throw new Error('Method not implemented.');
+    }
     constructor(private _appLocalizationService: AppLocalizationService) {}
 
     createDateRangePickerOptions(): any {

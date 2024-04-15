@@ -21,5 +21,7 @@ namespace MyCompanyName.AbpZeroTemplate.MyDocument
         ListResultDto<DocumentListDto> Search(GetDocumentInput input, int option = 0, string str_dateValid = "", string str_dateExpire = "");
 
         Task CreateDocument(CreateDocumentInput input);
+
+        Task EditDocument(CreateDocumentInput input);
     }
 }

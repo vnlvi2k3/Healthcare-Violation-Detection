@@ -40,9 +40,9 @@ export class QuanlyvanbanComponent extends AppComponentBase implements OnInit {
       this.downloadUrl = AppConsts.remoteServiceBaseUrl + '/FileUpload/DownloadFile';
   }
 
-  convertDate(isoDate: DateTime): string {
-    const date = moment(isoDate);
-    return date.format('DD/MM/YYYY');
+  convertDate(isoDate: Date): string {
+    const formattedDate = moment(isoDate).format('DD/MM/YYYY');
+    return formattedDate;
   }
 
   ngOnInit(): void {
