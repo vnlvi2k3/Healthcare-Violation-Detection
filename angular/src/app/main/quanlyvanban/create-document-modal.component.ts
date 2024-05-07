@@ -86,9 +86,21 @@ export class CreateDocumentModalComponent extends AppComponentBase {
     
     isValidCode(): boolean {
         const code = this.document.code;
-        const pattern = /\d+\/[A-ZĐĐ]+-[A-ZĐĐ]+$/;
+        const hasLeadingSpace_or_trailingSpace = code.startsWith(' ') || code.startsWith('\t') || code.endsWith(' ') || code.endsWith('\t');
+        if (hasLeadingSpace_or_trailingSpace) {
+            return false;
+        }
+        // const pattern = /^0[1-9]|([1-9]\d+)\/[A-ZĐĐ]+-[A-Za-zĐđ]+$/; 
+        const pattern = /^(0[1-9]|([1-9]\d+))\/[A-ZĐĐ]+-[A-Za-zĐđ]+$/;
         return pattern.test(code);
     }
+    isValidationDateBeforeExpiration(): boolean {
+        return this.document.validation < this.document.expiration;
+      }    
+
+    isPublishDateBeforeValidation(): boolean {
+        return this.document.publishDate < this.document.validation;
+      }       
 
     checkDup(): void {
         this._documentService.getDocument(this.document.code).subscribe((result) => {

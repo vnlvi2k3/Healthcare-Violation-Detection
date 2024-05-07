@@ -86,6 +86,9 @@
                                            [ngModel]="convertDate(document.expiration)">
                                 </div>
                             </div>
+                            <div *ngIf="!isValidationDateBeforeExpiration() || !isPublishDateBeforeValidation()" class="alert alert-warning mt-2">
+                                Lưu ý: Vui lòng nhập đúng logic các ngày
+                            </div>
                         </div>
                         <div class="row mb-6">
                             <div class="col">

@@ -4,8 +4,9 @@ import { DocumentServiceProxy , CreateDocumentInput} from '@shared/service-proxi
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { HttpClient } from '@angular/common/http';
 import { AppConsts } from '@shared/AppConsts';
-import { DateTime } from 'luxon';
+// import { DateTime } from 'luxon';
 import { DatePipe } from '@angular/common';
+import { DateTime } from 'luxon';
 
 @Component({
     selector: 'editDocumentModal',
@@ -39,11 +40,8 @@ export class EditDocumentModalComponent extends AppComponentBase {
         this.uploadUrl = AppConsts.remoteServiceBaseUrl + '/FileUpload/UploadFile'
     }
 
-    convertDate(isoDate: DateTime): string {
-        const date = new Date(isoDate.toISO()); // Convert isoDate to a Date object
-        const datePipe = new DatePipe('en-US');
-        return datePipe.transform(date, 'dd/MM/yyyy');
-        // return date;
+    convertDate(isoDate): string {
+        return DateTime.fromISO(isoDate).toFormat('dd/MM/yyyy');
     }
 
     show(documentId): void{
@@ -58,6 +56,18 @@ export class EditDocumentModalComponent extends AppComponentBase {
     onShown(): void{
         
     }
+
+    isValidationDateBeforeExpiration(): boolean {
+        console.log(this.document.validation);
+        console.log(this.document.expiration);
+        return this.document.validation < this.document.expiration;
+      }    
+
+    isPublishDateBeforeValidation(): boolean {
+        console.log(this.document.validation);
+        console.log(this.document.expiration);
+        return this.document.publishDate < this.document.validation;
+      }       
 
     save(): void{
         this.saving = true;
@@ -94,7 +104,12 @@ export class EditDocumentModalComponent extends AppComponentBase {
 
     isValidCode(): boolean {
         const code = this.document.code;
-        const pattern = /\d+\/[A-ZĐĐ]+-[A-ZĐĐ]+$/;
+        const hasLeadingSpace_or_trailingSpace = code.startsWith(' ') || code.startsWith('\t') || code.endsWith(' ') || code.endsWith('\t');
+        if (hasLeadingSpace_or_trailingSpace) {
+            return false;
+        }
+        // const pattern = /^0[1-9]|([1-9]\d+)\/[A-ZĐĐ]+-[A-Za-zĐđ]+$/; 
+        const pattern = /^(0[1-9]|([1-9]\d+))\/[A-ZĐĐ]+-[A-Za-zĐđ]+$/;
         return pattern.test(code);
     }
 

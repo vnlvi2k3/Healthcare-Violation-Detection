@@ -58,7 +58,8 @@
                                            placeholder="Chọn ngày"
                                            class="form-control"
                                            bsDatepicker
-                                           [(ngModel)]="document.publishDate">
+                                           [(ngModel)]="document.publishDate"
+                                           #publishDate="ngModel">
                                 </div>
                             </div>
                             <div class="col">
@@ -69,9 +70,11 @@
                                            placeholder="Chọn ngày"
                                            class="form-control"
                                            bsDatepicker
-                                           [(ngModel)]="document.validation">
+                                           [(ngModel)]="document.validation"
+                                           #validationDate="ngModel">
                                 </div>
                             </div>
+
                             <div class="col">
                                 <div class="form-group">
                                     <label for="datepicker3">Ngày hết hiệu lực</label>
@@ -80,8 +83,12 @@
                                            placeholder="Chọn ngày"
                                            class="form-control"
                                            bsDatepicker
-                                           [(ngModel)]="document.expiration">
+                                           [(ngModel)]="document.expiration"
+                                           #expirationDate="ngModel">
                                 </div>
+                            </div>
+                            <div *ngIf="!isValidationDateBeforeExpiration() || !isPublishDateBeforeValidation()" class="alert alert-warning mt-2">
+                                Lưu ý: Vui lòng nhập đúng logic các ngày
                             </div>
                         </div>
                         <div class="row mb-6">
@@ -168,7 +175,7 @@
                 </div>
                 <div class="modal-footer">
                     <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{"Cancel" | localize}}</button>
-                    <button type="submit" class="btn btn-primary" [disabled]="!isValidCode() || !personForm.form.valid || isDuplicated || !fileUploaded" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot' | localize)">
+                    <button type="submit" class="btn btn-primary" [disabled]="!isValidCode() || !isValidationDateBeforeExpiration() || !isPublishDateBeforeValidation() ||!personForm.form.valid || isDuplicated || !fileUploaded" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot' | localize)">
                         <i class="fa fa-save"></i> <span>{{"Save" | localize}}</span>
                     </button>
                 </div>
